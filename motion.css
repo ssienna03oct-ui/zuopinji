@@ -1,0 +1,7 @@
+@media (prefers-reduced-motion:no-preference){
+  .page{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .page.is-visible{opacity:1;transform:translateY(0)}
+  .page-005.is-visible img{animation:contents-settle .9s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes contents-settle{from{transform:scale(1.012)}to{transform:scale(1)}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}body{transition:none}}

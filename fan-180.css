@@ -1,0 +1,2 @@
+.card-gallery .card-grid{width:min(94vw,1300px);height:min(68vw,760px);min-height:520px}.card-gallery .gallery-card{width:min(18vw,250px)}
+@media(max-width:700px){.card-gallery .card-grid{width:100vw;height:128vw;min-height:460px}.card-gallery .gallery-card{width:27vw}}
