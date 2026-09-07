@@ -1,0 +1,4 @@
+.page-005 .chapter-link{border-radius:0;cursor:pointer;transition:none}
+.page-005 .chapter-link::after{display:none}
+.page-005 .chapter-link:hover,.page-005 .chapter-link:focus{background:transparent;transform:none}
+.page-005 .chapter-link span{display:none}

@@ -1,0 +1,12 @@
+/* Scroll-linked depth: subtle enough to preserve the portfolio artwork. */
+html.has-inertia-scroll{scroll-behavior:auto!important}
+@media(prefers-reduced-motion:no-preference){
+  .page:not(.page-005):not(.page-014):not(.page-030) img,.nomaster-video-page video{
+    opacity:var(--scroll-opacity,1);
+    filter:blur(var(--scroll-blur,0px));
+    transform:translate3d(0,var(--scroll-shift,0px),0) scale(var(--scroll-scale,1));
+    transform-origin:center center;
+    will-change:transform,filter,opacity;
+  }
+}
+@media(prefers-reduced-motion:reduce){html.has-inertia-scroll{scroll-behavior:auto}.page img,.nomaster-video-page video{filter:none!important;transform:none!important;opacity:1!important}}

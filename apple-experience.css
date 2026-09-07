@@ -1,0 +1,35 @@
+:root{--system-font:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;--glass-fill:linear-gradient(145deg,#ffffffe0 0%,#f5f5f3a6 48%,#e7e9e57d 100%);--glass-stroke:#ffffffa8;--glass-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 #ffffff66,0 10px 30px #22252b18,0 2px 8px #19191910}
+html{scroll-padding-top:62px}body{font-family:var(--system-font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}::selection{background:#3972d52b;color:var(--ink)}
+.topbar{inset:10px 14px auto;height:44px;padding:0 16px;border:1px solid var(--glass-stroke);border-radius:999px;background:var(--glass-fill);box-shadow:var(--glass-shadow);backdrop-filter:blur(26px) saturate(175%) contrast(105%);-webkit-backdrop-filter:blur(26px) saturate(175%) contrast(105%);letter-spacing:.025em}
+.topbar::after{content:"";position:absolute;pointer-events:none;inset:1px;border-radius:inherit;background:linear-gradient(105deg,#ffffff6b 0 10%,transparent 34% 70%,#ffffff52 100%);mix-blend-mode:screen}
+.topbar>*{position:relative;z-index:1}.topbar a{margin-left:-8px;padding:8px;border-radius:999px;transition:background-color .2s ease,transform .2s ease}.topbar a:hover{background:#ffffff70}.topbar a:active{transform:scale(.97)}
+.page{padding-top:62px}.page-number{right:calc(3vw + 10px);bottom:14px;min-width:38px;padding:6px 8px;text-align:center;border:1px solid #ffffff8f;border-radius:999px;background:#f7f6f1a8;box-shadow:inset 0 1px 0 #fff,0 4px 14px #19191912;backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);font-variant-numeric:tabular-nums}
+.page-005 .chapter-link:focus-visible,.gallery-card:focus-visible,.gallery-close:focus-visible,.card-focus-close:focus-visible{outline:3px solid #3478f6;outline-offset:3px}
+.project-view .pager a:not([href*="page-005"]){display:grid}.project-view .pager a[href*="page-005"]{font-size:12px}.project-view .pager a[href*="page-005"]::after{content:""}.project-view .pager a[href*="page-005"] .nav-label{font-size:12px}
+@media(prefers-reduced-motion:no-preference){.page{transform:translateY(12px);transition:opacity .38s ease-out,transform .52s cubic-bezier(.2,.75,.2,1)}.page.is-visible{transform:translateY(0)}}
+@media(max-width:700px){html{scroll-padding-top:48px}.topbar{inset:6px 8px auto;height:38px;padding:0 10px}.topbar a{margin-left:-5px;padding:6px}.page{padding-top:48px}.page-number{right:calc(2vw + 5px);bottom:7px;min-width:30px;padding:4px 6px}.project-view .pager a[href*="page-005"],.project-view .pager a[href*="page-005"] .nav-label{font-size:10px}}
+@media(prefers-reduced-transparency:reduce){.topbar,.pager,.page-number{background:#f7f6f1f7;backdrop-filter:none;-webkit-backdrop-filter:none}}
+@media(prefers-contrast:more){.topbar,.pager,.page-number{border-color:#19191966;background:#fff}.topbar a,.pager a{font-weight:600}}
+@media(prefers-reduced-motion:reduce){.page{opacity:1;transform:none}.topbar a,.pager a{transition:none}}
+/* Reading controls follow the vertical flow and retain visible labels on touch screens. */
+/* Clip the personal-work fan to the same rounded 16:9 canvas as the pages. */
+.inline-card-gallery{width:calc(100% - 6vw);aspect-ratio:16 / 9;min-height:0;margin:62px auto 0;padding:0;border:0;border-radius:28px;background:#f8f8f6;overflow:hidden;isolation:isolate;clip-path:inset(0 round 28px);box-shadow:0 10px 28px #19191910}
+.inline-card-gallery::before{display:none}
+.inline-card-gallery,.card-focus{background:#fff}
+.inline-card-gallery .gallery-head{position:absolute;top:14%;left:8%;right:8%;margin:0;padding:0;text-align:center;z-index:3}
+.inline-card-gallery .gallery-close{position:absolute;top:16px;right:24px;z-index:4}
+.inline-card-gallery .card-grid{position:absolute;bottom:0;left:0;width:100%;height:62%;min-height:0;margin:0;overflow:visible}
+@media(max-width:700px){.inline-card-gallery{width:calc(100% - 4vw);margin-top:48px;border-radius:16px;clip-path:inset(0 round 16px)}.inline-card-gallery .gallery-head{top:12%;left:5%;right:5%;line-height:1.3}.inline-card-gallery .gallery-head p{font-size:9px}.inline-card-gallery .gallery-head a{margin-top:5px;font-size:9px}.inline-card-gallery .gallery-close{top:0;right:8px;font-size:9px}.inline-card-gallery .gallery-card{width:17vw}}
+html{scroll-snap-type:none}
+body.preview-open{overflow:hidden}
+.card-focus-close,.gallery-close{min-width:44px;min-height:44px}
+@media(prefers-reduced-motion:reduce){.card-focus img{animation:none}}
+.pager{bottom:calc(16px + env(safe-area-inset-bottom));right:calc(16px + env(safe-area-inset-right))}
+.project-view .pager a{min-width:54px;min-height:54px;gap:4px;align-content:center;padding:6px 12px}
+.project-view .pager .nav-label,.project-view .pager a[href*="page-005"] .nav-label{font-size:12px;line-height:1.2;white-space:nowrap}
+.nav-icon{width:20px;height:20px}
+#pages{padding-bottom:90px}
+.topbar #page-count{flex-shrink:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.topbar #index-link{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar #project-title{font-size:12px}
+@media(max-width:700px){.project-view .topbar{height:auto;min-height:58px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;padding:6px 12px}.project-view .topbar #index-link{grid-column:1;grid-row:1;font-size:10px}.project-view .topbar #project-title{grid-column:1;grid-row:2;max-width:100%;font-size:11px}.project-view .topbar #page-count{grid-column:2;grid-row:1 / 3;font-size:11px}.project-view .page{padding-top:74px}.project-view{scroll-padding-top:74px}.pager a{min-height:44px;min-width:44px}.project-view .pager a{min-height:54px}}
