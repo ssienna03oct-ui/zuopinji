@@ -11,3 +11,25 @@ html{scroll-padding-top:62px}body{font-family:var(--system-font);-webkit-font-sm
 @media(prefers-reduced-transparency:reduce){.topbar,.pager,.page-number{background:#f7f6f1f7;backdrop-filter:none;-webkit-backdrop-filter:none}}
 @media(prefers-contrast:more){.topbar,.pager,.page-number{border-color:#19191966;background:#fff}.topbar a,.pager a{font-weight:600}}
 @media(prefers-reduced-motion:reduce){.page{opacity:1;transform:none}.topbar a,.pager a{transition:none}}
+/* Reading controls follow the vertical flow and retain visible labels on touch screens. */
+/* Clip the personal-work fan to the same rounded 16:9 canvas as the pages. */
+.inline-card-gallery{width:calc(100% - 6vw);aspect-ratio:16 / 9;min-height:0;margin:62px auto 0;padding:0;border:0;border-radius:28px;background:#f8f8f6;overflow:hidden;isolation:isolate;clip-path:inset(0 round 28px);box-shadow:0 10px 28px #19191910}
+.inline-card-gallery::before{display:none}
+.inline-card-gallery,.card-focus{background:#fff}
+.inline-card-gallery .gallery-head{position:absolute;top:14%;left:8%;right:8%;margin:0;padding:0;text-align:center;z-index:3}
+.inline-card-gallery .gallery-close{position:absolute;top:16px;right:24px;z-index:4}
+.inline-card-gallery .card-grid{position:absolute;bottom:0;left:0;width:100%;height:62%;min-height:0;margin:0;overflow:visible}
+@media(max-width:700px){.inline-card-gallery{width:calc(100% - 4vw);margin-top:48px;border-radius:16px;clip-path:inset(0 round 16px)}.inline-card-gallery .gallery-head{top:12%;left:5%;right:5%;line-height:1.3}.inline-card-gallery .gallery-head p{font-size:9px}.inline-card-gallery .gallery-head a{margin-top:5px;font-size:9px}.inline-card-gallery .gallery-close{top:0;right:8px;font-size:9px}.inline-card-gallery .gallery-card{width:17vw}}
+html{scroll-snap-type:none}
+body.preview-open{overflow:hidden}
+.card-focus-close,.gallery-close{min-width:44px;min-height:44px}
+@media(prefers-reduced-motion:reduce){.card-focus img{animation:none}}
+.pager{bottom:calc(16px + env(safe-area-inset-bottom));right:calc(16px + env(safe-area-inset-right))}
+.project-view .pager a{min-width:54px;min-height:54px;gap:4px;align-content:center;padding:6px 12px}
+.project-view .pager .nav-label,.project-view .pager a[href*="page-005"] .nav-label{font-size:12px;line-height:1.2;white-space:nowrap}
+.nav-icon{width:20px;height:20px}
+#pages{padding-bottom:90px}
+.topbar #page-count{flex-shrink:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.topbar #index-link{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar #project-title{font-size:12px}
+@media(max-width:700px){.project-view .topbar{height:auto;min-height:58px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;padding:6px 12px}.project-view .topbar #index-link{grid-column:1;grid-row:1;font-size:10px}.project-view .topbar #project-title{grid-column:1;grid-row:2;max-width:100%;font-size:11px}.project-view .topbar #page-count{grid-column:2;grid-row:1 / 3;font-size:11px}.project-view .page{padding-top:74px}.project-view{scroll-padding-top:74px}.pager a{min-height:44px;min-width:44px}.project-view .pager a{min-height:54px}}
