@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="欧阳雨晴 2026 视觉设计作品集" />
   <title>欧阳雨晴 — 2026 作品集</title>
+  <link rel="stylesheet" href="vendor/bootstrap-grid.min.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="interaction.css" />
   <link rel="stylesheet" href="plain-click.css" />
@@ -27,6 +28,7 @@
   <link rel="stylesheet" href="framework-navigation.css" />
   <link rel="stylesheet" href="scroll-experience.css" />
   <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="bootstrap-responsive.css" />
 </head>
 <body>
   <header class="topbar"><a id="index-link" href="#page-001">欧阳雨晴 / PORTFOLIO 2026</a><span id="project-title">INDEX</span><a class="home-mode-link" href="?view=home">首页模式</a><span id="page-count">001 / 108</span><span class="reading-progress" aria-hidden="true"></span></header>
@@ -68,20 +70,20 @@
           </div>
         </div>
       </section>
-      <section class="home-intro" id="selected-projects">
+      <section class="home-intro container-fluid" id="selected-projects">
         <p>SELECTED PROJECTS</p>
         <h2>从品牌到插画，<br />建立具有个性的视觉世界。</h2>
       </section>
-      <section class="home-feature-grid" aria-label="精选项目">
-        <article class="home-project home-project-wide"><a href="?project=nomaster"><figure><video class="home-project-video" autoplay muted loop playsinline preload="metadata" poster="assets/nomaster.png" aria-label="NoMaster 项目动态预览"><source src="media/nomaster-motion.mp4" type="video/mp4" /></video></figure><div><p>BRAND DESIGN · 02</p><h3>NoMaster</h3><span>查看完整项目 →</span></div></a></article>
-        <article class="home-project"><a href="?project=haochao"><figure><img src="pages/019.png" alt="好巢项目第 19 页预览" loading="lazy" /></figure><div><p>BRAND DESIGN · 01</p><h3>好巢 / Wonder Nest</h3><span>探索项目 →</span></div></a></article>
-        <article class="home-project"><a href="?project=veccirc"><figure><img src="assets/veccirc.png" alt="VECCIRC 项目预览" loading="lazy" /></figure><div><p>BRAND DESIGN · 03</p><h3>VECCIRC</h3><span>探索项目 →</span></div></a></article>
+      <section class="home-feature-grid row" aria-label="精选项目">
+        <article class="home-project home-project-wide col-12"><a href="?project=nomaster"><figure><video class="home-project-video" autoplay muted loop playsinline preload="metadata" poster="assets/nomaster.png" aria-label="NoMaster 项目动态预览"><source src="media/nomaster-motion.mp4" type="video/mp4" /></video></figure><div><p>BRAND DESIGN · 02</p><h3>NoMaster</h3><span>查看完整项目 →</span></div></a></article>
+        <article class="home-project col-12 col-md-6"><a href="?project=haochao"><figure><img src="pages/019.png" alt="好巢项目第 19 页预览" loading="lazy" /></figure><div><p>BRAND DESIGN · 01</p><h3>好巢 / Wonder Nest</h3><span>探索项目 →</span></div></a></article>
+        <article class="home-project col-12 col-md-6"><a href="?project=veccirc"><figure><img src="assets/veccirc.png" alt="VECCIRC 项目预览" loading="lazy" /></figure><div><p>BRAND DESIGN · 03</p><h3>VECCIRC</h3><span>探索项目 →</span></div></a></article>
       </section>
       <section class="home-collection" aria-labelledby="collection-title">
         <div class="home-collection-shell">
-          <header class="home-collection-heading">
-            <div><p>MORE WORLDS · 05</p><h2 id="collection-title">更多视觉世界</h2></div>
-            <p class="home-collection-hint">滑动卡片选择项目<br /><img class="home-collection-arrow" src="assets/more-worlds-arrow.png" alt="" aria-hidden="true" /></p>
+          <header class="home-collection-heading row">
+            <div class="col-7 col-md-8"><p>MORE WORLDS · 05</p><h2 id="collection-title">更多视觉世界</h2></div>
+            <p class="home-collection-hint col-5 col-md-4">滑动卡片选择项目<br /><img class="home-collection-arrow" src="assets/more-worlds-arrow.png" alt="" aria-hidden="true" /></p>
           </header>
           <figure class="home-collection-feature"><video autoplay muted loop playsinline preload="metadata" aria-label="更多视觉世界动态背景"><source src="media/more-worlds-background.mp4" type="video/mp4" /></video></figure>
           <div class="home-collection-carousel" aria-label="更多视觉世界项目卡片">

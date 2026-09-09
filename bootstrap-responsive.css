@@ -1,0 +1,78 @@
+/* Bootstrap-driven responsive layout, scoped to preserve the portfolio's visual language. */
+.home-feature-grid.row{
+  --bs-gutter-x:24px;
+  --bs-gutter-y:58px;
+  display:flex;
+  gap:0;
+  margin:0;
+}
+.home-feature-grid.row>.home-project{padding-inline:calc(var(--bs-gutter-x) * .5)}
+.home-feature-grid.row>.home-project-wide{width:100%}
+.home-collection-heading.row{
+  --bs-gutter-x:32px;
+  width:100%;
+  gap:0;
+  margin:0;
+}
+.home-collection-heading.row>*{padding-inline:calc(var(--bs-gutter-x) * .5)}
+
+/* Desktop: full editorial composition. */
+@media(min-width:992px){
+  .home-feature-grid.row{padding-inline:calc(3vw - 12px)}
+  .home-collection-shell{padding-inline:clamp(48px,4.2vw,80px)}
+  .page{min-height:100vh}
+}
+
+/* iPad/tablet: reduce scale and keep the two project cards balanced. */
+@media(min-width:768px) and (max-width:991.98px){
+  .portfolio-home{--home-header-height:clamp(30px,3.947vw,40px)}
+  .home-feature-grid.row{--bs-gutter-x:18px;--bs-gutter-y:42px;padding:18px 3vw 82px}
+  .home-project div{grid-template-columns:1fr;padding-top:14px}
+  .home-project span{margin-top:9px}
+  .home-project h3{font-size:26px}
+  .home-intro{padding:72px 7vw 58px}
+  .home-intro h2{font-size:38px}
+  .home-collection{padding:72px 0}
+  .home-collection-shell{min-height:690px;padding:44px 38px 220px}
+  .home-collection-heading h2{font-size:40px}
+  .home-collection-feature{width:min(720px,78vw);margin-top:38px}
+  .home-collection-grid a{flex-basis:210px}
+  .home-reader-callout{padding:86px 6vw}
+  .home-footer{padding-inline:4vw}
+  body:not(.home-view) .page,body.project-view .page{padding-top:32px}
+  body:not(.home-view) .page,body.project-view .page{min-height:auto}
+  .nomaster-video-page{min-height:auto}
+  .project-view .topbar{inset:8px 10px auto}
+}
+
+/* Phone: single-column content, touch-sized controls and compact typography. */
+@media(max-width:767.98px){
+  .home-view .home-hero{height:auto;min-height:0;aspect-ratio:16/9}
+  .home-view .home-cover-stage{width:100%;height:auto;aspect-ratio:16/9}
+  .home-feature-grid.row{--bs-gutter-x:0;--bs-gutter-y:44px;margin:0;padding:12px 4vw 72px}
+  .home-feature-grid.row>.home-project{padding-inline:0}
+  .home-project div{grid-template-columns:1fr}
+  .home-project span{margin-top:10px}
+  .home-project h3{font-size:24px}
+  .home-collection-heading.row{--bs-gutter-x:12px;align-items:flex-start}
+  .home-collection-heading.row>*{padding-inline:6px}
+  .home-collection-heading .home-collection-hint{max-width:none;margin-right:0}
+  .home-collection-feature{width:100%}
+  .home-footer{gap:10px;padding-inline:4vw}
+  .home-footer a,.home-footer p,.home-footer small{overflow-wrap:anywhere}
+  .topbar{max-width:calc(100vw - 16px)}
+  .topbar #project-title{display:none}
+  .pager{max-width:calc(100vw - 16px);overflow-x:auto}
+  body:not(.home-view) .page,body.project-view .page{min-height:auto;padding-top:15px}
+  .nomaster-video-page{min-height:auto;padding-block:15px}
+}
+
+@media(max-width:420px){
+  .home-intro h2{font-size:25px}
+  .home-collection-heading h2{font-size:27px}
+  .home-collection-heading .home-collection-hint{font-size:10px}
+  .home-collection-grid a{flex-basis:176px}
+  .home-collection-grid img{height:138px}
+  .home-footer{grid-template-columns:1fr auto;row-gap:16px}
+  .home-footer-role{grid-column:1/-1;grid-row:2;justify-self:start;text-align:left}
+}
