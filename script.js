@@ -134,6 +134,21 @@ if (collectionTrack) {
 }
 const homeHero = document.querySelector('.home-hero');
 const homeCoverMotion = document.querySelector('.home-cover-motion');
+const deferredVideos = [...document.querySelectorAll('.deferred-video')];
+if (deferredVideos.length) {
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      });
+    }, { rootMargin:'180px 0px', threshold:.05 });
+    deferredVideos.forEach(video => videoObserver.observe(video));
+  } else {
+    deferredVideos.forEach(video => video.play().catch(() => {}));
+  }
+}
 const homeCoverFreezeTime = 8.05;
 const freezeHomeCover = () => {
   homeCoverMotion.pause();
@@ -213,9 +228,11 @@ range.forEach(page => {
   section.id = `page-${pad(page)}`;
   section.className = `page page-${pad(page)}`;
   const image = document.createElement('img');
-  image.src = `pages/${pad(page)}.png`;
+  image.src = `pages/${pad(page)}.webp`;
   image.alt = `作品集第 ${page} 页${project ? `：${project.title}` : ''}`;
   image.loading = page === range[0] ? 'eager' : 'lazy';
+  image.decoding = 'async';
+  if (page === range[0]) image.fetchPriority = 'high';
   section.append(image);
   const number = document.createElement('span');
   number.className = 'page-number'; number.textContent = pad(page);
@@ -328,7 +345,7 @@ if (page14) {
   if (page14Image.complete) requestAnimationFrame(positionTrigger); else page14Image.addEventListener('load', positionTrigger, {once:true});
   trigger.addEventListener('click', () => { trigger.hidden = true; inlineVideo.hidden = false; inlineVideo.play().catch(() => {}); });
 }
-const cardFiles = ['01.png','02.png','03.jpg','04.png','05.png','06.jpg','07.jpg','08.jpg'];
+const cardFiles = ['01.webp','02.webp','03.webp','04.webp','05.webp','06.webp','07.webp','08.webp'];
 const cardAngles = [-18,-13,-8,-3,2,7,12,17];
 const cardSpreadX = [-31,-22,-13,-4,5,14,23,32];
 const cardSpreadY = ['12vw','11vw','6vw','2vw','1vw','6vw','12vw','13vw'];
@@ -341,7 +358,7 @@ cardFiles.forEach((file, index) => {
   card.style.setProperty('--spread-y', cardSpreadY[index]);
   card.style.setProperty('--layer', index + 1);
   card.tabIndex = 0; card.setAttribute('role', 'button'); card.setAttribute('aria-label', `放大查看个人作品 ${index + 1}`);
-  card.innerHTML = `<img src="cards/${file}" alt="个人作品精选 ${String(index + 1).padStart(2,'0')}" loading="${index < 4 ? 'eager' : 'lazy'}"><figcaption><span>0${index + 1}</span><span>PERSONAL WORK</span></figcaption>`;
+  card.innerHTML = `<img src="cards/${file}" alt="个人作品精选 ${String(index + 1).padStart(2,'0')}" loading="lazy" decoding="async"><figcaption><span>0${index + 1}</span><span>PERSONAL WORK</span></figcaption>`;
   cardGrid.append(card);
   cards.push(card);
   const open = () => openCardFocus(`cards/${file}`, `个人作品精选 ${String(index + 1).padStart(2,'0')}`);
