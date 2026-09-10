@@ -1,0 +1,79 @@
+/* Personal portfolio: quiet typography, generous artwork, hand-drawn identity. */
+.home-collection-dots button{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;background:transparent;cursor:pointer}
+.home-collection-dots button::after{content:"";width:5px;height:5px;border-radius:50%;background:#d0d0ce;transition:background .2s,transform .2s}
+.home-collection-dots button.is-active::after{background:#20201e;transform:scale(1.2)}
+.home-collection-dots button:focus-visible{outline:2px solid #3963c7;border-radius:50%}
+.home-collection-grid.is-dragging,.home-collection-grid.is-dragging *{cursor:grabbing;user-select:none}
+.home-collection-grid a:active{scale:.98}
+.home-collection-grid a{transition:transform .35s,box-shadow .35s,scale .16s}
+.portfolio-home{--editorial-ink:#20201e;--editorial-muted:#72726c;--editorial-space:clamp(20px,5vw,88px);background:#fff;color:var(--editorial-ink)}
+.home-view .home-header{box-shadow:0 1px 0 #20201e0d}
+.home-view .home-hero{max-height:860px}
+.home-intro{background:#fff;padding:clamp(48px,7vw,112px) var(--editorial-space) clamp(32px,4vw,64px)}
+.home-intro>p{font-size:12px;letter-spacing:.22em;color:var(--editorial-muted);margin:0 0 24px}
+.home-intro h2{max-width:1000px;font-size:clamp(28px,4vw,58px);font-weight:500;line-height:1.4;letter-spacing:-.045em;margin:0 auto;text-wrap:balance}
+.home-feature-grid.row{--bs-gutter-x:32px;--bs-gutter-y:64px;padding:0 calc(var(--editorial-space) - 16px) 100px;background:#fff}
+.home-project a{display:block}
+.home-project figure{border-radius:18px;background:#f4f4f0;isolation:isolate}
+.home-project div{padding:22px 0 0;column-gap:16px}
+.home-project p{font-size:12px;letter-spacing:.16em;color:var(--editorial-muted);margin-bottom:12px}
+.home-project h3{font-size:clamp(24px,2.7vw,38px);letter-spacing:-.04em;line-height:1.2}
+.home-project span{font-size:13px;line-height:1.5;color:var(--editorial-muted);text-decoration:none;transition:color .2s}
+.home-project a:hover span{color:var(--editorial-ink)}
+.home-project img,.home-project-video{transition:transform .8s cubic-bezier(.2,.65,.3,1)}
+.home-project a:hover img,.home-project a:hover .home-project-video{transform:scale(1.018)}
+.home-collection{background:#f7f7f4;padding:0}
+.home-collection-shell{min-height:0;padding:70px 0 36px;background:transparent;overflow:hidden}
+.home-collection-heading.row{padding:0 var(--editorial-space);--bs-gutter-x:0;align-items:start}
+.home-collection-heading.row>*{padding:0}
+.home-collection-heading p{font-size:12px;letter-spacing:.18em;color:var(--editorial-muted);margin-bottom:16px}
+.home-collection-heading h2{font-size:clamp(30px,3.6vw,50px);line-height:1.2;letter-spacing:-.04em}
+.home-collection-heading .home-collection-hint{font-size:13px;line-height:1.6;text-align:right;max-width:none;margin:0;color:var(--editorial-muted)}
+.home-collection-arrow{margin-left:auto;margin-right:18px}
+.home-collection-feature{width:min(880px,80%);margin:0 auto;aspect-ratio:16/9;border-radius:0;background:transparent;mix-blend-mode:multiply}
+.home-collection-carousel{position:relative;inset:auto;margin-top:-65px;overflow:visible}
+.home-collection-grid{gap:20px;padding:20px var(--editorial-space) 28px;scroll-padding-inline:var(--editorial-space)}
+.home-collection-grid a{flex:0 0 clamp(210px,19vw,300px);min-height:0;padding:0 0 14px;border-radius:16px;background:#fff;box-shadow:0 3px 12px #20201e05;overflow:hidden;transition:transform .35s,box-shadow .35s}
+.home-collection-grid img{height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:0}
+.home-collection-grid span{padding:22px 18px 8px}
+.home-collection-grid b{font-size:19px;letter-spacing:-.025em}
+.home-collection-grid small{font-size:11px;letter-spacing:.12em;margin-top:9px;color:var(--editorial-muted)}
+.home-collection-grid a:hover{transform:translateY(-6px);box-shadow:0 14px 28px #20201e0e}
+.home-collection-dots{position:relative;inset:auto;transform:none;justify-content:center;gap:9px;margin:4px 0 0}
+.home-reader-callout{background:#f7f7f4;color:var(--editorial-ink);padding:70px var(--editorial-space) 84px;border-top:1px solid #20201e10}
+.home-reader-callout>p{font-size:12px;letter-spacing:.18em;color:var(--editorial-muted)}
+.home-reader-callout h2{font-size:clamp(24px,3vw,40px);letter-spacing:-.035em;line-height:1.4;margin:18px auto 28px}
+.home-reader-callout a{background:#20201e;color:#fff;font-size:13px;min-height:48px;padding:0 28px}
+.home-reader-callout a:hover{background:#383832;color:#fff}
+.home-footer{padding:44px var(--editorial-space);gap:20px;background:#20201e}
+.home-footer a,.home-footer p{font-size:13px}
+.home-footer small{font-size:12px}
+.home-footer .home-footer-role a{font-size:12px;margin-top:10px}
+.portfolio-home a:focus-visible{outline:2px solid #3963c7;outline-offset:5px}
+@media(min-width:768px) and (max-width:1199.98px){
+  .home-project div{grid-template-columns:1fr}
+  .home-project span{margin-top:12px}
+  .home-collection-feature{width:88%}
+  .home-collection-grid a{flex-basis:240px}
+}
+@media(max-width:767.98px){
+  .home-feature-grid.row{--bs-gutter-x:0;--bs-gutter-y:38px;padding:0 var(--editorial-space) 52px}
+  .home-project figure{border-radius:12px}
+  .home-project div{padding-top:16px}
+  .home-intro>p{font-size:11px;margin-bottom:18px}
+  .home-project h3{font-size:25px}
+  .home-collection-shell{padding-top:40px}
+  .home-collection-heading h2{font-size:clamp(25px,6vw,34px)}
+  .home-collection-heading p{font-size:10px;letter-spacing:.1em}
+  .home-collection-heading .home-collection-hint{font-size:11px}
+  .home-collection-feature{width:100%;margin-top:12px}
+  .home-collection-carousel{margin-top:-20px}
+  .home-collection-grid{gap:14px;padding-top:12px}
+  .home-collection-grid a{flex-basis:clamp(200px,65vw,290px)}
+  .home-collection-grid b{font-size:18px}
+  .home-reader-callout{padding:42px var(--editorial-space) 52px}
+  .home-footer{grid-template-columns:1fr auto;padding-block:30px;row-gap:24px}
+  .home-footer-role{grid-column:1/-1;grid-row:2;justify-self:center;text-align:center}
+}
+@media(hover:none){.home-project a:hover img,.home-project a:hover video,.home-collection-grid a:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.home-project img,.home-project-video,.home-collection-grid a{transition:none}}

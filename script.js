@@ -24,6 +24,7 @@ if (homeView) {
   let homeScrollReady = false;
   let lastHeaderScrollY = savedHomeScroll;
   let headerScrollFrame = 0;
+  let headerTravel = 0;
   history.scrollRestoration = 'manual';
   const restoreHomeScroll = () => {
     const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
@@ -42,9 +43,11 @@ if (homeView) {
     headerScrollFrame = requestAnimationFrame(() => {
       const currentScrollY = Math.max(0, scrollY);
       const delta = currentScrollY - lastHeaderScrollY;
-      if (currentScrollY < 32 || delta < -7 || document.body.classList.contains('home-menu-visible')) {
+      if (delta && Math.sign(delta) !== Math.sign(headerTravel)) headerTravel = 0;
+      headerTravel += delta;
+      if (currentScrollY < 32 || headerTravel < -18 || document.body.classList.contains('home-menu-visible')) {
         document.body.classList.remove('home-header-hidden');
-      } else if (delta > 7) {
+      } else if (headerTravel > 32) {
         document.body.classList.add('home-header-hidden');
       }
       lastHeaderScrollY = currentScrollY;
@@ -77,9 +80,25 @@ document.addEventListener('keydown', event => { if (event.key === 'Escape' && ho
 const collectionTrack = document.querySelector('.home-collection-grid');
 if (collectionTrack) {
   const collectionCards = [...collectionTrack.querySelectorAll(':scope > a')];
-  const collectionDots = [...document.querySelectorAll('.home-collection-dots i')];
+  const dotsContainer = document.querySelector('.home-collection-dots');
+  dotsContainer.removeAttribute('aria-hidden');
+  dotsContainer.setAttribute('aria-label', '选择作品卡片');
+  const collectionDots = [...dotsContainer.children].map((dot, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-label', `查看 ${collectionCards[index].querySelector('b').textContent}`);
+    dot.replaceWith(button);
+    button.addEventListener('click', () => {
+      const card = collectionCards[index];
+      collectionTrack.scrollTo({left:card.offsetLeft - collectionTrack.offsetLeft - (collectionTrack.clientWidth - card.offsetWidth)/2, behavior:reducedMotion.matches ? 'auto' : 'smooth'});
+    });
+    return button;
+  });
   let collectionScrollFrame = 0;
-  const setActiveCollectionDot = index => collectionDots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
+  const setActiveCollectionDot = index => collectionDots.forEach((dot, dotIndex) => {
+    dot.classList.toggle('is-active', dotIndex === index);
+    dot.setAttribute('aria-pressed', String(dotIndex === index));
+  });
   const syncCollectionDotToScroll = () => {
     const trackCenter = collectionTrack.getBoundingClientRect().left + collectionTrack.clientWidth / 2;
     let activeIndex = 0;
@@ -92,28 +111,34 @@ if (collectionTrack) {
     setActiveCollectionDot(activeIndex);
     collectionScrollFrame = 0;
   };
-  collectionCards.forEach((card, index) => {
-    card.addEventListener('pointerenter', () => setActiveCollectionDot(index));
-    card.addEventListener('focus', () => setActiveCollectionDot(index));
-  });
-  collectionTrack.addEventListener('pointerleave', syncCollectionDotToScroll);
   collectionTrack.addEventListener('scroll', () => {
     if (!collectionScrollFrame) collectionScrollFrame = requestAnimationFrame(syncCollectionDotToScroll);
   }, { passive:true });
-  setActiveCollectionDot(0);
+  requestAnimationFrame(() => {
+    collectionTrack.scrollLeft = Number(sessionStorage.getItem('portfolio-card-scroll')) || 0;
+    syncCollectionDotToScroll();
+  });
+  addEventListener('pagehide', () => sessionStorage.setItem('portfolio-card-scroll', String(collectionTrack.scrollLeft)));
+  addEventListener('resize', syncCollectionDotToScroll);
   let dragStartX = 0;
   let dragStartScroll = 0;
   let dragging = false;
+  let moved = false;
+  collectionTrack.addEventListener('dragstart', event => event.preventDefault());
   collectionTrack.addEventListener('pointerdown', event => {
-    if (event.target.closest('a')) return;
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
     dragging = true;
+    moved = false;
     dragStartX = event.clientX;
     dragStartScroll = collectionTrack.scrollLeft;
-    collectionTrack.classList.add('is-dragging');
   });
   collectionTrack.addEventListener('pointermove', event => {
     if (!dragging) return;
     const distance = event.clientX - dragStartX;
+    if (!moved && Math.abs(distance) < 8) return;
+    moved = true;
+    collectionTrack.classList.add('is-dragging');
+    collectionTrack.setPointerCapture(event.pointerId);
     collectionTrack.scrollLeft = dragStartScroll - distance;
   });
   const finishCollectionDrag = () => {
@@ -122,15 +147,11 @@ if (collectionTrack) {
   };
   collectionTrack.addEventListener('pointerup', finishCollectionDrag);
   collectionTrack.addEventListener('pointercancel', finishCollectionDrag);
-  collectionTrack.addEventListener('wheel', event => {
-    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-    const maxScroll = collectionTrack.scrollWidth - collectionTrack.clientWidth;
-    const canMove = (delta > 0 && collectionTrack.scrollLeft < maxScroll) || (delta < 0 && collectionTrack.scrollLeft > 0);
-    if (canMove) {
-      event.preventDefault();
-      collectionTrack.scrollLeft += delta;
-    }
-  }, { passive:false });
+  window.addEventListener('pointerup', finishCollectionDrag);
+  collectionTrack.addEventListener('lostpointercapture', finishCollectionDrag);
+  collectionTrack.addEventListener('click', event => {
+    if (moved) { event.preventDefault(); event.stopPropagation(); moved = false; }
+  }, true);
 }
 const homeHero = document.querySelector('.home-hero');
 const homeCoverMotion = document.querySelector('.home-cover-motion');
@@ -179,7 +200,14 @@ homeCoverMotion.addEventListener('timeupdate', () => {
 homeCoverMotion.addEventListener('ended', () => {
   freezeHomeCover();
 });
-document.querySelectorAll('.home-bubble-controls button').forEach(button => button.addEventListener('click', () => replayHomeCover(button)));
+document.querySelectorAll('.home-bubble-controls button').forEach(button => {
+  button.setAttribute('aria-label', '轻触圆圈');
+  button.addEventListener('click', () => {
+    button.classList.remove('local-bounce');
+    void button.offsetWidth;
+    button.classList.add('local-bounce');
+  });
+});
 if (!homeView || reducedMotion.matches) {
   homeCoverMotion.pause();
   homeHero.classList.add('is-complete');
@@ -222,6 +250,39 @@ if (aboutView) {
   pagerLinks[0].textContent = '返回首页';
   pagerLinks[1].remove();
   pagerLinks[2].remove();
+
+  const aboutMotionPage = document.createElement('section');
+  aboutMotionPage.id = 'page-001';
+  aboutMotionPage.className = 'page about-motion-page';
+  aboutMotionPage.setAttribute('aria-label', '关于我动态介绍');
+  aboutMotionPage.innerHTML = `
+    <div class="about-motion-viewport">
+      <div class="about-motion-camera">
+        <div class="about-track-card about-portrait-layer" data-card-index="0"><img class="about-portrait-image" src="assets/about-motion/portrait.svg" alt="个人肖像"></div>
+        <img class="about-card about-track-card about-red-layer" data-card-index="1" src="assets/about-motion/red.svg" alt="红色眼睛插画">
+        <div class="about-orbit about-track-card" data-card-index="2" aria-hidden="true">
+          <svg viewBox="0 0 191 191" role="presentation">
+            <circle class="about-orbit-ring" cx="95.5" cy="95.5" r="94" />
+            <path id="particle-curve-a" d="M18 109 C48 30 135 23 174 91 C147 152 76 175 23 126" />
+            <path id="particle-curve-b" d="M36 52 C92 5 170 63 140 132 C97 170 34 142 31 86" />
+            <circle class="about-particle p1" r="3.8"><animateMotion dur="3.8s" repeatCount="indefinite"><mpath href="#particle-curve-a" /></animateMotion></circle>
+            <circle class="about-particle p2" r="2.8"><animateMotion dur="3.8s" begin="-1.25s" repeatCount="indefinite"><mpath href="#particle-curve-a" /></animateMotion></circle>
+            <circle class="about-particle p3" r="2.2"><animateMotion dur="3.1s" begin="-.7s" repeatCount="indefinite"><mpath href="#particle-curve-b" /></animateMotion></circle>
+          </svg>
+        </div>
+        <div class="about-skill-loop about-track-card" data-card-index="3" aria-label="熟练使用 Ps、Ai、Figma 与 OpenAI">
+          <div><span>Ps&nbsp;&nbsp; Ai&nbsp;&nbsp; Figma&nbsp;&nbsp; Open-ai</span><span aria-hidden="true">Ps&nbsp;&nbsp; Ai&nbsp;&nbsp; Figma&nbsp;&nbsp; Open-ai</span></div>
+        </div>
+        <div class="about-black-switch about-track-card" data-card-index="4" aria-hidden="true">
+          <img class="about-black-before" src="assets/about-motion/black-before.svg" alt="">
+          <img class="about-black-after" src="assets/about-motion/black-after.svg" alt="">
+          <i class="about-eye-shine shine-one"></i><i class="about-eye-shine shine-two"></i>
+        </div>
+        <button class="about-enter" type="button" aria-label="展开关于我第 2 页">About me</button>
+      </div>
+    </div>
+    <span class="page-number">001</span>`;
+  pages.append(aboutMotionPage);
 }
 range.forEach(page => {
   const section = document.createElement('section');
@@ -432,7 +493,7 @@ const requestDepthUpdate = () => {
 addEventListener('scroll', requestDepthUpdate, {passive:true});
 addEventListener('resize', requestDepthUpdate);
 
-const inertiaEnabled = !reducedMotion.matches && matchMedia('(pointer:fine)').matches;
+const inertiaEnabled = !homeView && !reducedMotion.matches && matchMedia('(pointer:fine)').matches;
 let inertiaCurrent = scrollY;
 let inertiaTarget = scrollY;
 let inertiaFrame = 0;
@@ -490,7 +551,8 @@ if (inertiaEnabled) {
 }
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {
   if (!entry.isIntersecting) return;
-  pageCount.textContent = `${entry.target.id.slice(-3)} / ${pad(aboutView ? 3 : indexView ? 5 : project ? project.end : 108)}`;
+  const visiblePage = Number(entry.target.id.slice(-3));
+  pageCount.textContent = project ? `${pad(visiblePage - project.start + 1)} / ${pad(project.end - project.start + 1)}` : `${pad(visiblePage)} / ${pad(aboutView ? 3 : indexView ? 5 : 108)}`;
   if (location.hash !== `#${entry.target.id}`) history.replaceState(null, '', `#${entry.target.id}`);
   pagerLinks.forEach(link => {
     const isCurrent = link.hash === `#${entry.target.id}`;

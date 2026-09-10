@@ -1,0 +1,44 @@
+.illustration-worlds{position:relative;width:100%;aspect-ratio:1920/1080;scroll-margin-top:var(--home-header-height,0px);background:#fff;overflow:hidden;color:#171717;font-family:'MiSans Portfolio Light','PingFang SC',sans-serif}
+.illustration-cover,.illustration-expanded{position:absolute;inset:0;background:#fff}
+.illustration-cover{transition:opacity .45s ease,transform .6s cubic-bezier(.22,.72,.18,1)}
+.illustration-cover-video{position:absolute;z-index:3;left:2.96875%;top:41.759%;width:45.7292%;height:43.241%;object-fit:cover;mix-blend-mode:multiply}
+.illustration-cover-art{position:absolute;z-index:2;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.illustration-stack-motion{position:absolute;z-index:3;inset:0;overflow:hidden;pointer-events:none}
+.illustration-stack-wash{position:absolute;left:57.2%;top:20.5%;width:38.2%;height:61.5%;background:#fff}
+.illustration-stack-layer{position:absolute;display:block;aspect-ratio:440/540;overflow:hidden;border-radius:15%;box-shadow:0 12px 26px #15261c12;transform:rotate(var(--stack-r));transform-origin:50% 50%}
+.illustration-stack-layer>img{display:block;width:100%;height:100%;object-fit:cover}
+.illustration-stack-layer>.illustration-frame-sheet{position:absolute;width:374%;height:167%;max-width:none;left:-134.5%;top:-25%;object-fit:fill}
+.stack-layer-1{left:58.25%;top:29.6%;width:22.84%;--stack-r:-11.42deg;--arrival-x:-12px;--arrival-y:-2px;--arrival-r:-13.2deg}
+.stack-layer-2{left:61.05%;top:30.2%;width:22.42%;--stack-r:-10.07deg;--arrival-x:-7px;--arrival-y:-5px;--arrival-r:-11.1deg}
+.stack-layer-3{left:64.43%;top:27.97%;width:22.92%;--stack-r:-3.85deg;--arrival-x:-2px;--arrival-y:-7px;--arrival-r:-4.3deg}
+.stack-layer-4{left:67.85%;top:26.92%;width:22.92%;--stack-r:.65deg;--arrival-x:6px;--arrival-y:-4px;--arrival-r:1.7deg}
+.stack-layer-5{left:71.5%;top:25.24%;width:22.92%;--stack-r:5.93deg;--arrival-x:13px;--arrival-y:1px;--arrival-r:8deg}
+.illustration-worlds.is-stack-arrival .illustration-stack-layer{animation:illustration-stack-arrival .92s cubic-bezier(.22,.72,.18,1)}
+@keyframes illustration-stack-arrival{0%,100%{transform:translate(0,0) rotate(var(--stack-r))}46%{transform:translate(var(--arrival-x),var(--arrival-y)) rotate(var(--arrival-r))}}
+.illustration-cover-heading{position:absolute;z-index:4;left:2.94%;top:16.32%;width:55%;pointer-events:none}
+.illustration-cover-heading h2{margin:0;font:700 clamp(32px,5vw,72px)/1.2 Arial,'PingFang SC',sans-serif;letter-spacing:-.035em}
+.illustration-cover-copy-live{position:absolute;z-index:4;left:2.5%;top:32.2%;width:53%;margin:0;font:300 clamp(14px,1.4vw,20px)/1.55 'MiSans Portfolio Light','PingFang SC',sans-serif;letter-spacing:0;color:#20201e;pointer-events:none}
+.illustration-stack{position:absolute;z-index:4;left:58.85%;top:22.69%;width:35.57%;height:56.12%;border:0;padding:0;background:transparent;cursor:pointer;filter:drop-shadow(0 14px 22px #15261c18)}
+.illustration-stack:focus-visible{outline:2px solid #3963c7;outline-offset:6px;border-radius:18px}
+.illustration-expanded{z-index:4;visibility:hidden;opacity:0;background:#ffffffd1;backdrop-filter:blur(3px) saturate(.9);-webkit-backdrop-filter:blur(3px) saturate(.9);transition:opacity .42s ease,visibility .64s}
+.illustration-expanded[hidden]{display:block}
+.illustration-part{position:absolute;top:2.2%;left:50%;transform:translateX(-50%);margin:0;font-size:clamp(13px,1.4vw,25px);font-weight:300;white-space:nowrap}
+.illustration-track{position:absolute;inset:7% 0 13%;display:flex;align-items:center;gap:8.8vw;overflow-x:auto;overflow-y:hidden;padding:3% 40.26vw 5%;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain;cursor:grab}
+.illustration-track::-webkit-scrollbar{display:none}.illustration-track:active{cursor:grabbing}
+.illustration-card{flex:0 0 17.8vw;scroll-snap-align:center;color:inherit;text-decoration:none;text-align:center;transform:translate(var(--scatter-x,0),var(--scatter-y,0)) scale(.28) rotate(180deg);opacity:0;transition:transform .82s cubic-bezier(.22,.72,.18,1),opacity .3s ease,filter .35s ease;transform-origin:center}
+.illustration-card-media{position:relative;display:block;width:100%;aspect-ratio:409/516;overflow:hidden;border-radius:16.63%;box-shadow:0 12px 30px #17171712;background:#fff}
+.illustration-card-media>img{display:block;width:100%;height:100%;object-fit:cover}
+.illustration-card-media>.illustration-frame-sheet{position:absolute;width:360.72%;height:160.71%;max-width:none;left:-128.47%;top:-22.47%;object-fit:fill}
+.illustration-card-label{display:block;margin-top:1.35vw;font-size:clamp(12px,1.25vw,24px);font-weight:300;line-height:1.25}.illustration-card small{display:block;margin-top:.36vw;font-size:.72em}
+.illustration-worlds.is-expanded .illustration-cover{opacity:1;transform:scale(.985);pointer-events:none}
+.illustration-worlds.is-expanded .illustration-expanded{visibility:visible;opacity:1}
+.illustration-worlds.is-expanded .illustration-card{transform:translate(0,0) scale(var(--card-scale,.9)) rotate(0);opacity:1}
+.illustration-worlds.is-closing .illustration-cover{pointer-events:none}
+.illustration-worlds.is-closing .illustration-expanded{visibility:visible;opacity:1}
+.illustration-worlds.is-closing .illustration-card{opacity:1}
+.illustration-worlds.is-expanded.is-blank-pulse .illustration-card{animation:illustration-blank-pulse .44s cubic-bezier(.22,.72,.18,1)}
+@keyframes illustration-blank-pulse{0%,100%{transform:translate(0,0) scale(var(--card-scale,.9)) rotate(0)}45%{transform:translate(var(--blank-gather-x,0),0) scale(calc(var(--card-scale,.9) * .97)) rotate(0)}}
+.illustration-card.is-centered{z-index:2;filter:saturate(1.04)}
+.illustration-card:focus-visible{outline:2px solid #3963c7;outline-offset:6px}
+@media(max-width:767.98px){.illustration-worlds{aspect-ratio:1920/1080}.illustration-cover-heading{width:55%}.illustration-cover-heading h2{font-size:clamp(32px,10vw,48px)}.illustration-cover-copy-live{width:53%;font-size:14px}.illustration-track{inset:10% 0 7%;gap:12vw;padding:3% 36vw 5%}.illustration-card{flex-basis:26vw}.illustration-card-label{margin-top:2vw;font-size:8px}.illustration-card small{margin-top:.7vw}}
+@media(prefers-reduced-motion:reduce){.illustration-cover,.illustration-expanded,.illustration-card{transition:none}.illustration-worlds.is-expanded.is-blank-pulse .illustration-card,.illustration-worlds.is-stack-arrival .illustration-stack-layer{animation:none}}
