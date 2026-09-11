@@ -300,7 +300,7 @@ range.forEach(page => {
   section.className = `page page-${pad(page)}`;
   const image = document.createElement('img');
   image.src = [2, 3, 4].includes(page)
-    ? `assets/pages-update-20260911/Frame ${page}.png`
+    ? `assets/pages-update-20260911/Frame ${page}.png?v=20260911-2`
     : `pages/${pad(page)}.webp`;
   image.alt = `作品集第 ${page} 页${project ? `：${project.title}` : ''}`;
   image.loading = page === range[0] ? 'eager' : 'lazy';
