@@ -1,23 +1,23 @@
-.botanical-motion{position:relative;width:100%;aspect-ratio:1920/1080;overflow:hidden;background:#fff;color:#171717;scroll-margin-top:var(--home-header-height,0px)}
-.botanical-stage{position:absolute;inset:0;overflow:hidden;perspective:1400px}
+.botanical-motion{position:relative;width:100%;height:clamp(460px,46vw,780px);overflow:hidden;background:#fff;color:#171717;scroll-margin-top:var(--home-header-height,0px)}
+.botanical-stage{position:absolute;inset:0;overflow:hidden;perspective:1400px;transform:scale(.86);transform-origin:center}
 .botanical-tilt{position:absolute;inset:-1.2%;transform:scale(1.015);transform-origin:50% 70%;transform-style:preserve-3d}
 .botanical-camera{position:absolute;inset:0;transform-origin:50% 42%;will-change:transform}
 .botanical-plant-tilt{position:absolute;inset:0;transform-origin:50% 76%;transform-style:preserve-3d;will-change:transform}
 .botanical-motion.is-complete .botanical-plant-tilt{clip-path:inset(3% 24% 3% 24%)}
 .botanical-art,.botanical-vase-overlay{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;user-select:none}
-.botanical-motion.is-playing .botanical-camera{animation:botanical-camera 7s linear both}
+.botanical-motion.is-playing .botanical-camera{animation:botanical-camera 5s linear both}
 .botanical-vase{transform-box:fill-box;transform-origin:50% 78%}
 .botanical-vase-water{transform-box:fill-box;transform-origin:center}
 .botanical-vase-name{font:300 17px/1.08 Arial,sans-serif;letter-spacing:.02em;opacity:0}
-.botanical-motion.is-playing .botanical-vase-water{animation:botanical-water-ripple 1.42s cubic-bezier(.22,.7,.2,1) 4.27s both}
-.botanical-motion.is-playing .botanical-vase-name{animation:botanical-name-in 1.1s ease-out 5.46s forwards}
+.botanical-motion.is-playing .botanical-vase-water{animation:botanical-water-ripple 1.014s cubic-bezier(.22,.7,.2,1) 3.05s both}
+.botanical-motion.is-playing .botanical-vase-name{animation:botanical-name-in .786s ease-out 3.9s forwards}
 .botanical-copy{position:absolute;z-index:2;top:49.3%;display:flex;margin:0;font:300 clamp(12px,.84vw,16px)/1.2 'MiSans Portfolio Light','PingFang SC',sans-serif;letter-spacing:.02em;white-space:nowrap;pointer-events:none}
 .botanical-copy-left{left:12.5%}.botanical-copy-right{right:12.5%}
 .botanical-copy span{opacity:0;transform:translateX(-5px)}
-.botanical-motion.is-playing .botanical-copy span{animation:botanical-letter-in .34s ease-out calc(4.35s + var(--letter-index)*.085s) forwards}
+.botanical-motion.is-playing .botanical-copy span{animation:botanical-letter-in .243s ease-out calc(3.107s + var(--letter-index)*.061s) forwards}
 @keyframes botanical-letter-in{to{opacity:1;transform:translateX(0)}}
 @keyframes botanical-camera{0%{transform:translate3d(0,.35%,0) scale(1.018)}30%{transform:translate3d(0,-.1%,0) scale(1.035)}45%{transform:translate3d(0,-.45%,0) scale(1.062)}64%{transform:translate3d(0,.35%,0) scale(1.04)}82%,100%{transform:translate3d(0,0,0) scale(1)}}
 @keyframes botanical-water-ripple{0%{transform:scale(1)}22%{transform:scaleX(1.045) scaleY(.955)}50%{transform:scaleX(.985) scaleY(1.018)}72%{transform:scaleX(1.015) scaleY(.99)}100%{transform:scale(1)}}
 @keyframes botanical-name-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:767.98px){.botanical-copy{font-size:7px}.botanical-copy-left{left:10.5%}.botanical-copy-right{right:10.5%}}
+@media(max-width:767.98px){.botanical-motion{height:clamp(420px,76svh,620px)}.botanical-stage{transform:scale(.82)}.botanical-copy{font-size:7px}.botanical-copy-left{left:10.5%}.botanical-copy-right{right:10.5%}}
 @media(prefers-reduced-motion:reduce){.botanical-motion .botanical-camera,.botanical-motion .botanical-vase-water,.botanical-motion .botanical-vase-name,.botanical-motion .botanical-copy span{opacity:1;transform:none;animation:none}}

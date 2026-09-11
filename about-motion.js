@@ -14,7 +14,14 @@
   const entryDuration = 1050;
   const entryStagger = 85;
   const spinDuration = 6800;
+  const normalSpinRate = Math.PI * 2 / spinDuration;
+  const boostDuration = spinDuration / 1.875;
   let spinStart = entryStart + entryDuration + entryStagger * (cards.length - 1);
+  let phaseAnchor = 0;
+  let phaseAnchorTime = spinStart;
+  let boostStart = 0;
+  let boostStartPhase = 0;
+  let boostActive = false;
   let autoSpinning = !reducedMotion;
   let step = 1;
   let lockedUntil = 0;
@@ -26,9 +33,28 @@
 
   const render = now => {
     const entryEnd = entryStart + entryDuration + entryStagger * (cards.length - 1);
+    let selfSpinY = 0;
+    let axisSpinning = false;
     if (autoSpinning && now >= entryEnd) {
-      const spinProgress = Math.max(0, (now - spinStart) / spinDuration);
-      currentPhase = spinProgress * Math.PI * 2;
+      if (boostActive) {
+        const boostProgress = Math.max(0, Math.min(1, (now - boostStart) / boostDuration));
+        const orbitProgress = boostProgress <= .75
+          ? boostProgress * (16 / 15)
+          : .8 + (8 / 15) * (5 * boostProgress - 2 * boostProgress * boostProgress - 2.625);
+        currentPhase = boostStartPhase + orbitProgress * Math.PI * 2;
+        const selfSpinProgress = Math.max(0, Math.min(1, (boostProgress - .72) / .28));
+        selfSpinY = (1 - Math.cos(selfSpinProgress * Math.PI)) * 180;
+        axisSpinning = selfSpinProgress > 0 && selfSpinProgress < 1;
+        if (boostProgress >= 1) {
+          boostActive = false;
+          phaseAnchor = boostStartPhase + Math.PI * 2;
+          phaseAnchorTime = boostStart + boostDuration;
+          currentPhase = phaseAnchor + Math.max(0, now - phaseAnchorTime) * normalSpinRate;
+          selfSpinY = 0;
+        }
+      } else {
+        currentPhase = phaseAnchor + Math.max(0, now - phaseAnchorTime) * normalSpinRate;
+      }
       targetPhase = currentPhase;
     } else if (!autoSpinning) {
       currentPhase += (targetPhase - currentPhase) * .105;
@@ -46,7 +72,7 @@
       const entry = 1 - Math.pow(1 - rawEntry, 4);
       const scale = .14 + (targetScale - .14) * entry;
       const rotate = -8 + Math.cos(angle) * 7 + depth * 5;
-      card.style.transform = `translate(-50%,-50%) translate3d(${(x * entry).toFixed(3)}vw,${(y * entry).toFixed(3)}vh,${Math.round(depth * 100 * entry)}px) scale(${scale.toFixed(4)}) rotate(${(rotate * entry).toFixed(2)}deg)`;
+      card.style.transform = `translate(-50%,-50%) translate3d(${(x * entry).toFixed(3)}vw,${(y * entry).toFixed(3)}vh,${Math.round(depth * 100 * entry)}px) scale(${scale.toFixed(4)}) rotate(${(rotate * entry).toFixed(2)}deg) rotateY(${selfSpinY.toFixed(2)}deg)`;
       card.style.opacity = ((.42 + depth * .58) * entry).toFixed(3);
       card.style.zIndex = String(10 + Math.round(depth * 90));
       card.style.filter = `saturate(${(.76 + depth * .24).toFixed(2)}) brightness(${(.84 + depth * .16).toFixed(2)})`;
@@ -61,18 +87,30 @@
         blackWasFront = isFront;
       }
     });
+    page.classList.toggle('is-axis-spinning', axisSpinning);
     const entering = !reducedMotion && now < entryStart + entryDuration + (cards.length - 1) * entryStagger;
     if (!entering) page.classList.add('is-entered');
     if (entering || autoSpinning || Math.abs(targetPhase - currentPhase) > .0004) raf = requestAnimationFrame(render);
     else raf = 0;
   };
   const requestRender = () => { if (!raf) raf = requestAnimationFrame(render); };
+  const triggerOrbitBoost = () => {
+    if (reducedMotion || !autoSpinning || boostActive || !page.classList.contains('is-entered')) return;
+    const now = performance.now();
+    boostStartPhase = phaseAnchor + Math.max(0, now - phaseAnchorTime) * normalSpinRate;
+    boostStart = now;
+    boostActive = true;
+    requestRender();
+  };
   const startEntrance = () => {
     page.classList.remove('is-entered', 'is-scattering');
     void page.offsetWidth;
     page.classList.add('is-scattering');
     entryStart = reducedMotion ? performance.now() - entryDuration : performance.now();
     spinStart = entryStart + entryDuration + entryStagger * (cards.length - 1);
+    phaseAnchor = 0;
+    phaseAnchorTime = spinStart;
+    boostActive = false;
     currentPhase = 0;
     targetPhase = 0;
     autoSpinning = !reducedMotion;
@@ -97,7 +135,8 @@
     if (step === 1) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      if (!autoSpinning && page.classList.contains('is-entered')) targetPhase += event.deltaY * .0022;
+      if (event.deltaY > 0) triggerOrbitBoost();
+      else if (!autoSpinning && page.classList.contains('is-entered')) targetPhase += event.deltaY * .0022;
       requestRender();
       return;
     }
@@ -125,7 +164,8 @@
     const distance = touchStartY - endY;
     if (Math.abs(distance) < 45) return;
     if (step === 1) {
-      targetPhase += Math.sign(distance) * Math.PI * .38;
+      if (distance > 0) triggerOrbitBoost();
+      else if (!autoSpinning) targetPhase += Math.sign(distance) * Math.PI * .38;
       requestRender();
     } else if (step === 2 && distance > 0) showStep(3);
     else if (step === 3 && distance < 0) showStep(2);

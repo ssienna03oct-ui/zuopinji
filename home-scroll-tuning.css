@@ -58,9 +58,9 @@
 .home-view .stack-layer-4{top:30.92%}
 .home-view .stack-layer-5{top:29.24%}
 .home-view .illustration-stack{top:26.69%}
-.home-view .home-reader-callout{padding:clamp(38px,4vw,56px) var(--editorial-space);background:#fff;color:#20201e;border:0;box-shadow:none;margin-top:-1px}
+.home-view .home-reader-callout{position:relative;z-index:3;padding:clamp(38px,4vw,56px) var(--editorial-space);background:#fff;color:#20201e;border:0;box-shadow:none;margin-top:-1px}
 .home-view .home-reader-callout h2{margin:16px auto 24px}
-.home-view .home-reader-callout a{min-width:112px;min-height:38px;padding:0 20px;background:#000;color:#fff;font-size:11px}
+.home-view .home-reader-callout a{position:relative;z-index:4;min-width:112px;min-height:38px;padding:0 20px;background:#000;color:#fff;font-size:11px;pointer-events:auto}
 .home-view .home-reader-callout a:hover{background:#202020;color:#fff}
 .home-view .home-footer{padding-top:36px;padding-bottom:36px}
 @media(max-width:767.98px){
@@ -86,7 +86,7 @@
 .home-view .home-identity>a{font-size:14px;padding:10px 0}
 .illustration-close{position:absolute;z-index:8;right:20px;top:12px;min-height:44px;padding:8px 14px;border:0;border-radius:24px;background:#fff;color:#171717;font:500 14px 'MiSans Home',sans-serif;cursor:pointer}
 .illustration-close:focus-visible,.illustration-track:focus-visible{outline:2px solid #3963c7;outline-offset:-3px}
-.home-view .illustration-track{inset:9% 0 9%}
+.home-view .illustration-track{inset:4% 0 14%;padding-top:1%;padding-bottom:15%}
 .home-view .illustration-card{flex-basis:min(17.8vw,31svh)}
 .home-view .illustration-card-label{font-size:14px}
 .home-view .illustration-card small{font-size:12px}
@@ -95,7 +95,7 @@
   .home-view .illustration-cover-heading{top:24px}
   .home-view .illustration-cover-copy-live{top:calc(24px + var(--home-section-title-size) + 16px);width:90%;font-size:14px}
   .home-view .illustration-card{flex-basis:39vw}
-  .home-view .illustration-track{padding:30px 30.5vw 42px;gap:17vw;inset:60px 0 14px}
+  .home-view .illustration-track{padding:14px 30.5vw 70px;gap:17vw;inset:48px 0 40px}
   .home-view .illustration-card-label{font-size:12px;margin-top:12px}
   .home-view .illustration-card small{font-size:11px;margin-top:5px}
   .home-view .illustration-part{top:26px;font-size:14px}

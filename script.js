@@ -18,6 +18,16 @@ const aboutView = searchParams.get('view') === 'about';
 if (homeView) document.body.classList.add('home-view');
 if (indexView) document.body.classList.add('index-view');
 if (aboutView) document.body.classList.add('about-view');
+const readerEntry = document.querySelector('[data-reader-entry]');
+if (readerEntry) {
+  readerEntry.addEventListener('click', event => {
+    event.preventDefault();
+    const readerUrl = new URL(location.href);
+    readerUrl.search = '?view=reader';
+    readerUrl.hash = 'page-001';
+    location.assign(readerUrl.href);
+  });
+}
 if (homeView) {
   const homeScrollKey = 'portfolio-home-scroll-y';
   const savedHomeScroll = Number(sessionStorage.getItem(homeScrollKey)) || 0;
@@ -258,7 +268,7 @@ if (aboutView) {
   aboutMotionPage.innerHTML = `
     <div class="about-motion-viewport">
       <div class="about-motion-camera">
-        <div class="about-track-card about-portrait-layer" data-card-index="0"><img class="about-portrait-image" src="assets/about-motion/portrait.svg" alt="个人肖像"></div>
+        <div class="about-track-card about-portrait-layer" data-card-index="0"><img class="about-portrait-image" src="assets/about-motion/portrait.svg?v=20260911-1" alt="个人肖像" decoding="async" fetchpriority="high"></div>
         <img class="about-card about-track-card about-red-layer" data-card-index="1" src="assets/about-motion/red.svg" alt="红色眼睛插画">
         <div class="about-orbit about-track-card" data-card-index="2" aria-hidden="true">
           <svg viewBox="0 0 191 191" role="presentation">

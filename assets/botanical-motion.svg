@@ -2,14 +2,14 @@
 <rect width="1920" height="1080" fill="white"/>
 <style>
   .bubble-shape{fill:#fff;fill-opacity:.3;stroke:#603813;stroke-width:1.2;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 18px 24px rgba(92,63,33,.08))}
-  .bubble-left{animation:bubbleLeft 7s linear both}
-  .bubble-right{animation:bubbleRight 7s linear both}
-  .falling-drop{fill:rgba(110,205,244,.35);stroke:#603813;stroke-width:.86;transform-box:fill-box;transform-origin:center;animation:dropFall 7s linear both}
+  .bubble-left{animation:bubbleLeft 5s linear both}
+  .bubble-right{animation:bubbleRight 5s linear both}
+  .falling-drop{fill:rgba(110,205,244,.35);stroke:#603813;stroke-width:.86;transform-box:fill-box;transform-origin:center;animation:dropFall 5s linear both}
   #vase-assembly{opacity:0;transform-box:fill-box;transform-origin:50% 78%;will-change:transform}
-  #vase-assembly&gt;path:nth-of-type(2){transform-box:fill-box;transform-origin:center;animation:waterRipple 7s cubic-bezier(.22,.7,.2,1) both}
-  #vase-assembly&gt;path:nth-of-type(3){opacity:0;animation:nameReveal 7s ease-out both}
-  svg&gt;path:nth-of-type(1),svg&gt;path:nth-of-type(2){stroke-dasharray:1200;stroke-dashoffset:1200;animation:stemGrow 7s cubic-bezier(.28,.72,.22,1) both}
-  svg&gt;path:nth-of-type(3),svg&gt;path:nth-of-type(4),svg&gt;path:nth-of-type(5),svg&gt;path:nth-of-type(6){opacity:0;transform-box:fill-box;transform-origin:center;animation:flowerBloom 7s cubic-bezier(.18,.8,.22,1) both}
+  #vase-assembly&gt;path:nth-of-type(2){transform-box:fill-box;transform-origin:center;animation:waterRipple 5s cubic-bezier(.22,.7,.2,1) both}
+  #vase-assembly&gt;path:nth-of-type(3){opacity:0;animation:nameReveal 5s ease-out both}
+  svg&gt;path:nth-of-type(1),svg&gt;path:nth-of-type(2){stroke-dasharray:1200;stroke-dashoffset:1200;animation:stemGrow 5s cubic-bezier(.28,.72,.22,1) both}
+  svg&gt;path:nth-of-type(3),svg&gt;path:nth-of-type(4),svg&gt;path:nth-of-type(5),svg&gt;path:nth-of-type(6){opacity:0;transform-box:fill-box;transform-origin:center;animation:flowerBloom 5s cubic-bezier(.18,.8,.22,1) both}
   svg&gt;path:nth-of-type(7),svg&gt;path:nth-of-type(8){opacity:0}
   @keyframes bubbleLeft{0%{opacity:0;transform:translate(-55px,34px) scale(.86) rotate(-5deg)}6%{opacity:1}18%{transform:translate(122px,-48px) scale(1.01) rotate(-7deg)}30%{transform:translate(315px,22px) scale(.98) rotate(5deg)}38%{transform:translate(428px,54px) scale(1.04,.96) rotate(10deg)}44%{opacity:1;transform:translate(478px,52px) scale(1.2,.76) rotate(13deg)}50%{opacity:.72;transform:translate(500px,50px) scale(.72,1.12) rotate(5deg)}56%,100%{opacity:0;transform:translate(508px,50px) scale(.32,1.34)}}
   @keyframes bubbleRight{0%{opacity:0;transform:translate(60px,-30px) scale(.86) rotate(5deg)}8%{opacity:1}20%{transform:translate(-120px,54px) scale(1.02) rotate(7deg)}31%{transform:translate(-315px,-32px) scale(.98) rotate(-5deg)}38%{transform:translate(-430px,-38px) scale(1.04,.96) rotate(-9deg)}44%{opacity:1;transform:translate(-478px,-34px) scale(1.18,.77) rotate(-12deg)}50%{opacity:.7;transform:translate(-500px,-31px) scale(.72,1.1) rotate(-4deg)}56%,100%{opacity:0;transform:translate(-508px,-30px) scale(.32,1.32)}}

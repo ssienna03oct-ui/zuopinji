@@ -12,7 +12,7 @@ if (homeView) {
       <div class="botanical-tilt">
         <div class="botanical-camera">
           <div class="botanical-plant-tilt">
-            <object class="botanical-art" data="assets/botanical-motion.svg?v=20260910-5" type="image/svg+xml" aria-label="泡泡、水滴、花瓶与生长花朵组成的动态视觉画板"></object>
+            <object class="botanical-art" data="assets/botanical-motion.svg?v=20260911-1" type="image/svg+xml" aria-label="泡泡、水滴、花瓶与生长花朵组成的动态视觉画板"></object>
             <svg class="botanical-vase-overlay" viewBox="0 0 1920 1080" aria-hidden="true">
               <g class="botanical-vase">
                 <path d="M858.7 708.05C863.89 711.28 871.12 713.08 877.22 713.15C926.87 713.72 976.61 701.09 1019.98 676.91C1023.28 675.07 1026.98 672.45 1026.91 668.67C1026.84 664.89 1019.73 663.57 1017.12 655.95C1013.28 644.74 931.87 660.5 922.03 662.95C899.06 668.65 861.2 676.62 849.81 700.41C841.91 716.9 847.97 741.3 847.02 758.97C845.05 795.62 839.16 832.46 835.22 868.95C834.4 876.59 833.62 884.62 836.62 891.7C841.84 904.03 856.29 909.14 869.21 912.67C900.64 921.26 933.05 928.54 965.54 926.12C998.03 923.7 1031.03 910.33 1050.64 884.3C1071.96 856.01 1074.37 816.97 1065.43 782.7C1056.49 748.43 1037.56 717.75 1018.88 687.66" fill="none" stroke="#603813" stroke-miterlimit="10"/>
@@ -26,7 +26,7 @@ if (homeView) {
       <p class="botanical-copy botanical-copy-left" aria-label="品牌，插画，产品">${makeLetters('品牌○插画○产品')}</p>
       <p class="botanical-copy botanical-copy-right" aria-label="平面，动效，交互">${makeLetters('平面○动效○交互')}</p>
     </div>`;
-  document.querySelector('#illustration-worlds').after(botanicalSection);
+  (document.querySelector('#orbit-gallery') || document.querySelector('#illustration-worlds')).after(botanicalSection);
 
   const stage = botanicalSection.querySelector('.botanical-stage');
   const tilt = botanicalSection.querySelector('.botanical-tilt');
@@ -56,7 +56,7 @@ if (homeView) {
     botanicalSection.classList.remove('is-playing');
     void botanicalSection.offsetWidth;
     botanicalSection.classList.add('is-playing');
-    completionTimer = window.setTimeout(() => botanicalSection.classList.add('is-complete'), 6650);
+    completionTimer = window.setTimeout(() => botanicalSection.classList.add('is-complete'), 4750);
   };
 
   const observer = new IntersectionObserver(entries => {

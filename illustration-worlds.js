@@ -6,17 +6,17 @@ if (homeView) {
   illustrationSection.innerHTML = `
     <div class="illustration-cover">
       <div class="illustration-visual">
-      <video class="illustration-cover-video" autoplay muted loop playsinline preload="auto" poster="assets/illustration-worlds/frame3-line.webp" aria-label="IP 与插画动态背景">
-        <source src="media/illustration-worlds.mp4" type="video/mp4" />
+      <video class="illustration-cover-video" muted loop playsinline preload="none" poster="assets/illustration-worlds/frame3-line.webp" aria-label="IP 与插画动态背景">
+        <source data-src="media/illustration-worlds.mp4" type="video/mp4" />
       </video>
-      <img class="illustration-cover-art" src="assets/illustration-worlds/frame-3-2026.svg" alt="五张 IP 与插画项目卡片的堆叠预览" />
+      <img class="illustration-cover-art" src="assets/illustration-worlds/frame-3-2026.svg" alt="五张 IP 与插画项目卡片的堆叠预览" loading="lazy" decoding="async" fetchpriority="low" />
       <div class="illustration-stack-motion" aria-hidden="true">
         <span class="illustration-stack-wash"></span>
-        <span class="illustration-stack-layer stack-layer-1"><img src="assets/illustration-worlds/stack-cherry.webp" alt="" /></span>
-        <span class="illustration-stack-layer stack-layer-2"><img src="assets/illustration-worlds/stack-crocs.webp" alt="" /></span>
-        <span class="illustration-stack-layer stack-layer-3"><img src="assets/illustration-worlds/stack-pink.webp" alt="" /></span>
-        <span class="illustration-stack-layer stack-layer-4"><img src="assets/illustration-worlds/stack-summer-lant.jpg" alt="" /></span>
-        <span class="illustration-stack-layer stack-layer-5"><img class="illustration-frame-sheet" src="assets/illustration-worlds/frame-4-2026.svg" alt="" /></span>
+        <span class="illustration-stack-layer stack-layer-1"><img src="assets/illustration-worlds/stack-cherry.webp" alt="" loading="lazy" decoding="async" fetchpriority="low" /></span>
+        <span class="illustration-stack-layer stack-layer-2"><img src="assets/illustration-worlds/stack-crocs.webp" alt="" loading="lazy" decoding="async" fetchpriority="low" /></span>
+        <span class="illustration-stack-layer stack-layer-3"><img src="assets/illustration-worlds/stack-pink.webp" alt="" loading="lazy" decoding="async" fetchpriority="low" /></span>
+        <span class="illustration-stack-layer stack-layer-4"><img src="assets/illustration-worlds/stack-summer-lant.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" /></span>
+        <span class="illustration-stack-layer stack-layer-5"><img class="illustration-frame-sheet" src="assets/illustration-worlds/frame-4-2026.svg" alt="" loading="lazy" decoding="async" fetchpriority="low" /></span>
       </div>
       <button class="illustration-stack" type="button" aria-label="展开 IP 与插画项目卡片" aria-expanded="false"></button>
       </div>
@@ -29,11 +29,11 @@ if (homeView) {
       <button class="illustration-close" type="button" aria-label="收起项目卡片">收起 ×</button>
       <p class="illustration-part">Part 2 - 3.</p>
       <div class="illustration-track" tabindex="0" aria-label="左右滑动浏览五个 IP 与插画项目">
-        <a class="illustration-card" href="?project=personal#page-101"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-cherry.webp" alt="Personal Works 项目预览" /></span><span class="illustration-card-label">Personal works<small>个人作品</small></span></a>
-        <a class="illustration-card" href="?project=garden#page-079"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-pink.webp" alt="迷失的少女花园项目预览" /></span><span class="illustration-card-label">Illustration design<small>迷失的少女花园</small></span></a>
-        <a class="illustration-card" href="?project=daidai#page-053"><span class="illustration-card-media"><img class="illustration-frame-sheet" src="assets/illustration-worlds/frame-4-2026.svg" alt="DAIDAI 项目预览" /></span><span class="illustration-card-label">Ip design<small>呆呆</small></span></a>
-        <a class="illustration-card" href="?project=summer#page-068"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-summer-lant.jpg" alt="Summer Dream 项目预览" /></span><span class="illustration-card-label">Summer dream<small>专辑设计</small></span></a>
-        <a class="illustration-card" href="?project=crocs#page-090"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-crocs.webp" alt="Crocs 项目预览" /></span><span class="illustration-card-label">Illustration design<small>Crocs</small></span></a>
+        <a class="illustration-card" href="?project=personal#page-101"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-cherry.webp" alt="Personal Works 项目预览" loading="lazy" decoding="async" fetchpriority="low" /></span><span class="illustration-card-label">Personal works<small>个人作品</small></span></a>
+        <a class="illustration-card" href="?project=garden#page-079"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-pink.webp" alt="迷失的少女花园项目预览" loading="lazy" decoding="async" fetchpriority="low" /></span><span class="illustration-card-label">Illustration design<small>迷失的少女花园</small></span></a>
+        <a class="illustration-card" href="?project=daidai#page-053"><span class="illustration-card-media"><img class="illustration-frame-sheet" src="assets/illustration-worlds/frame-4-2026.svg" alt="DAIDAI 项目预览" loading="lazy" decoding="async" fetchpriority="low" /></span><span class="illustration-card-label">Ip design<small>呆呆</small></span></a>
+        <a class="illustration-card" href="?project=summer#page-068"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-summer-lant.jpg" alt="Summer Dream 项目预览" loading="lazy" decoding="async" fetchpriority="low" /></span><span class="illustration-card-label">Summer dream<small>专辑设计</small></span></a>
+        <a class="illustration-card" href="?project=crocs#page-090"><span class="illustration-card-media"><img src="assets/illustration-worlds/stack-crocs.webp" alt="Crocs 项目预览" loading="lazy" decoding="async" fetchpriority="low" /></span><span class="illustration-card-label">Illustration design<small>Crocs</small></span></a>
       </div>
     </div>`;
   document.querySelector('.project-board-section').after(illustrationSection);
@@ -46,15 +46,35 @@ if (homeView) {
   const part = illustrationSection.querySelector('.illustration-part');
   const cards = [...illustrationSection.querySelectorAll('.illustration-card')];
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const videoSource = video.querySelector('source');
+  let videoLoaded = false;
   let closeTimer = 0;
   let blankPulseTimer = 0;
   let arrivalTimer = 0;
   let arrivalReady = true;
 
   const keepVideoPlaying = () => {
+    if (!videoLoaded) return;
     const attempt = video.play();
     if (attempt?.catch) attempt.catch(() => {});
   };
+  const loadCoverVideo = () => {
+    if (videoLoaded) return;
+    videoLoaded = true;
+    videoSource.src = videoSource.dataset.src;
+    videoSource.removeAttribute('data-src');
+    video.load();
+    keepVideoPlaying();
+  };
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        loadCoverVideo();
+        keepVideoPlaying();
+      } else if (videoLoaded) video.pause();
+    }, {rootMargin:'420px 0px'});
+    videoObserver.observe(illustrationSection);
+  } else loadCoverVideo();
   video.addEventListener('loadeddata', keepVideoPlaying, {once:true});
   addEventListener('pageshow', keepVideoPlaying, {passive:true});
 

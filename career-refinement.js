@@ -1,12 +1,12 @@
 // Editorial information remains independent of the cover movie.
 const identity = document.createElement('section');
 identity.className = 'home-identity';
-identity.innerHTML = '<p>欧阳雨晴 / PORTFOLIO 2026</p><h1>品牌视觉设计师</h1><p>以品牌识别为核心，连接插画与 IP 的创意表达。</p><a href="#selected-projects">查看精选项目 ↘</a>';
+identity.innerHTML = '<p>欧阳雨晴 / PORTFOLIO 2026</p><h1>视觉设计师</h1><p>以品牌识别为核心，连接插画与 IP 的创意表达。</p><a href="#selected-projects">查看精选项目 ↘</a>';
 document.querySelector('.home-hero').before(identity);
 const textNav = document.createElement('nav');
 textNav.className = 'home-text-nav';
 textNav.setAttribute('aria-label', '主要导航');
-textNav.innerHTML = '<a href="?view=home#selected-projects">作品</a><a href="?view=about#page-001">关于我</a><a href="mailto:1263247471@qq.com">联系 ↗</a>';
+textNav.innerHTML = '<a href="?view=home#selected-projects-board">作品</a><a href="?view=about#page-001">关于我</a><a href="mailto:1263247471@qq.com">联系 ↗</a>';
 document.querySelector('.home-header').append(textNav);
 const replay = document.createElement('button');
 replay.type = 'button'; replay.className = 'cover-replay'; replay.innerHTML = '<svg viewBox="0 0 48 64" aria-hidden="true"><path d="M4 24L24 4L44 24M24 4V60" /></svg>'; replay.setAttribute('aria-label', '重播封面动画');
@@ -56,20 +56,20 @@ if (homeView) {
       <p class="project-board-side project-board-part">Part 1.</p>
       <div class="project-card-grid" role="group" aria-label="八个精选项目，卡片会依次翻面">
       <div class="project-flip-card crop-tl" data-side="front"><div class="project-card-inner">
-        <span class="project-card-face project-card-front" aria-hidden="true"><img src="assets/project-boards/frame-1.svg" alt="" /></span>
-        <span class="project-card-face project-card-back" aria-hidden="true" inert><img src="assets/project-boards/frame-2.svg" alt="" /></span>
+        <span class="project-card-face project-card-front" aria-hidden="true"><img src="assets/project-boards/frame-1.svg" alt="" loading="lazy" decoding="async" /></span>
+        <span class="project-card-face project-card-back" aria-hidden="true" inert><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></span>
       </div></div>
       <div class="project-flip-card crop-tr" data-side="back"><div class="project-card-inner">
-        <a class="project-card-face project-card-front" href="?project=haochao" aria-label="查看好巢项目" inert><img src="assets/project-boards/frame-1.svg" alt="" /></a>
-        <a class="project-card-face project-card-back" href="?project=haochao" aria-label="查看好巢项目"><img src="assets/project-boards/frame-2.svg" alt="" /></a>
+        <a class="project-card-face project-card-front" href="?project=haochao" aria-label="查看好巢项目" inert><img src="assets/project-boards/frame-1.svg" alt="" loading="lazy" decoding="async" /></a>
+        <a class="project-card-face project-card-back" href="?project=haochao" aria-label="查看好巢项目"><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></a>
       </div></div>
       <div class="project-flip-card crop-bl" data-side="front"><div class="project-card-inner">
-        <a class="project-card-face project-card-front" href="?project=nomaster" aria-label="查看 NoMaster 项目"><img src="assets/project-boards/frame-1.svg" alt="" /></a>
-        <a class="project-card-face project-card-back" href="?project=nomaster" aria-label="查看 NoMaster 项目" inert><img src="assets/project-boards/frame-2.svg" alt="" /></a>
+        <a class="project-card-face project-card-front" href="?project=nomaster" aria-label="查看 NoMaster 项目"><img src="assets/project-boards/frame-1.svg" alt="" loading="lazy" decoding="async" /></a>
+        <a class="project-card-face project-card-back" href="?project=nomaster" aria-label="查看 NoMaster 项目" inert><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></a>
       </div></div>
       <div class="project-flip-card crop-br" data-side="back"><div class="project-card-inner">
-        <a class="project-card-face project-card-front" href="?project=veccirc" aria-label="查看 VECCIRC 项目" inert><img src="assets/project-boards/frame-1.svg" alt="" /></a>
-        <a class="project-card-face project-card-back" href="?project=veccirc" aria-label="查看 VECCIRC 项目"><img src="assets/project-boards/frame-2.svg" alt="" /></a>
+        <a class="project-card-face project-card-front" href="?project=veccirc" aria-label="查看 VECCIRC 项目" inert><img src="assets/project-boards/frame-1.svg" alt="" loading="lazy" decoding="async" /></a>
+        <a class="project-card-face project-card-back" href="?project=veccirc" aria-label="查看 VECCIRC 项目"><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></a>
       </div></div>
       </div>
       <p class="project-board-side project-board-year">2026</p>
@@ -165,6 +165,6 @@ if (project && facts[activeProject]) {
   pages.append(end);
 }
 // Keep the target heading accessible when following the home navigation.
-if (homeView && location.hash === '#selected-projects') {
-  addEventListener('load', () => requestAnimationFrame(() => requestAnimationFrame(() => document.querySelector('#selected-projects').scrollIntoView())));
+if (homeView && ['#selected-projects', '#selected-projects-board'].includes(location.hash)) {
+  addEventListener('load', () => requestAnimationFrame(() => requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView())));
 }
