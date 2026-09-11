@@ -299,7 +299,9 @@ range.forEach(page => {
   section.id = `page-${pad(page)}`;
   section.className = `page page-${pad(page)}`;
   const image = document.createElement('img');
-  image.src = `pages/${pad(page)}.webp`;
+  image.src = [2, 3, 4].includes(page)
+    ? `assets/pages-update-20260911/Frame ${page}.png`
+    : `pages/${pad(page)}.webp`;
   image.alt = `作品集第 ${page} 页${project ? `：${project.title}` : ''}`;
   image.loading = page === range[0] ? 'eager' : 'lazy';
   image.decoding = 'async';

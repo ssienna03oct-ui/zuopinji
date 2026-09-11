@@ -85,7 +85,7 @@ if (homeView) {
     return {
       x:rawX * Math.cos(orbitRotation) - rawY * Math.sin(orbitRotation),
       y:height * mode.centerY + rawX * Math.sin(orbitRotation) + rawY * Math.cos(orbitRotation),
-      scale:mix(mode.scaleBack, mode.scaleFront, depth) * mode.cardScale,
+      scale:mix(mode.scaleBack, mode.scaleFront, depth) * mode.cardScale * (width < 768 ? .62 : 1),
       opacity:mix(mode.opacityBack, 1, depth),
       rotateX:cos * mode.rotateX,
       rotateY:cos * mode.rotateY,
@@ -132,7 +132,8 @@ if (homeView) {
       } : toPose;
       const arcLift = rawProgress < 1 ? Math.sin(Math.PI * progress) * (index % 2 ? 16 : -16) : 0;
       card.style.transform = `translate3d(calc(-50% + ${pose.x.toFixed(2)}px),calc(-50% + ${(pose.y + arcLift).toFixed(2)}px),${(pose.depth * 90).toFixed(1)}px) scale(${pose.scale.toFixed(4)}) rotateX(${pose.rotateX.toFixed(2)}deg) rotateY(${pose.rotateY.toFixed(2)}deg) rotateZ(${pose.rotateZ.toFixed(2)}deg)`;
-      card.style.opacity = pose.opacity.toFixed(3);
+      // Keep overlapping artwork opaque so rear cards cannot show through.
+      card.style.opacity = '1';
       card.style.zIndex = String(10 + Math.round(pose.depth * 100));
       if (pose.depth > frontDepth) { frontDepth = pose.depth; frontIndex = index; }
     });
