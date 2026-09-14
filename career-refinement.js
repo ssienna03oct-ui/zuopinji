@@ -68,8 +68,8 @@ if (homeView) {
         <a class="project-card-face project-card-back" href="?project=nomaster" aria-label="查看 NoMaster 项目" inert><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></a>
       </div></div>
       <div class="project-flip-card crop-br" data-side="back"><div class="project-card-inner">
-        <a class="project-card-face project-card-front" href="?project=veccirc" aria-label="查看 VECGIRC 项目" inert><img src="assets/project-boards/frame-1.svg" alt="" loading="lazy" decoding="async" /></a>
-        <a class="project-card-face project-card-back" href="?project=veccirc" aria-label="查看 VECGIRC 项目"><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></a>
+        <a class="project-card-face project-card-front" href="?project=veccirc" aria-label="查看 VEGCIRC 项目" inert><img src="assets/project-boards/frame-1.svg" alt="" loading="lazy" decoding="async" /></a>
+        <a class="project-card-face project-card-back" href="?project=veccirc" aria-label="查看 VEGCIRC 项目"><img src="assets/project-boards/frame-2.svg" alt="" loading="lazy" decoding="async" /></a>
       </div></div>
       </div>
       <p class="project-board-side project-board-year">2026</p>
