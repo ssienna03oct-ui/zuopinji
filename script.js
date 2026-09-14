@@ -385,6 +385,7 @@ if (pageFive) pageFive.after(gallery);
 const cardGrid = document.querySelector('.card-grid');
 const cardFocus = document.querySelector('.card-focus');
 const cardFocusImage = cardFocus.querySelector('img');
+const cardFocusTitle = cardFocus.querySelector('.card-focus-title');
 let cardReturnFocus = null;
 const closeCardFocus = () => {
   if (!cardFocus.classList.contains('is-open')) return;
@@ -396,6 +397,7 @@ const closeCardFocus = () => {
 const openCardFocus = (source, label) => {
   cardReturnFocus = document.activeElement;
   cardFocusImage.src = source; cardFocusImage.alt = label;
+  cardFocusTitle.textContent = label.replace(/细节$/, '');
   cardFocus.classList.add('is-open'); cardFocus.setAttribute('aria-hidden', 'false'); cardFocus.setAttribute('aria-modal', 'true');
   document.body.classList.add('preview-open');
   [...document.body.children].forEach(element => { if (element !== cardFocus && !element.inert && !['SCRIPT','STYLE'].includes(element.tagName)) { element.inert = true; element.dataset.previewInert = 'true'; } });

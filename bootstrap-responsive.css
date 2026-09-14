@@ -76,3 +76,22 @@
   .home-footer{grid-template-columns:1fr auto;row-gap:16px}
   .home-footer-role{grid-column:1/-1;grid-row:2;justify-self:start;text-align:left}
 }
+
+/* Phone reader: keep every 16:9 artboard readable without changing page motion. */
+@media(max-width:767.98px){
+  html{scroll-padding-top:64px}
+  body.project-view{overflow-x:hidden}
+  body.project-view #pages{padding:58px 0 calc(78px + env(safe-area-inset-bottom))}
+  body.project-view .page{width:100%;padding:5px 0;scroll-margin-top:64px}
+  body.project-view .page img{width:calc(100% - 12px);max-width:none;border-radius:10px;box-shadow:0 4px 14px #1919190d}
+  body.project-view .page-number{right:10px;bottom:10px;font-size:8px}
+  body.project-view .topbar{inset:6px 8px auto;min-height:46px;padding:5px 10px;border-radius:16px}
+  body.project-view .topbar #index-link{font-size:9px}
+  body.project-view .topbar #project-title{display:block;font-size:10px;line-height:1.2}
+  body.project-view .topbar #page-count{font-size:10px}
+  body.project-view .pager{right:8px;bottom:calc(8px + env(safe-area-inset-bottom));max-width:calc(100vw - 16px);padding:4px;gap:2px}
+  body.project-view .pager a{min-width:42px;min-height:42px;padding:0 9px;font-size:9px}
+  .card-focus{padding:64px 14px 24px}
+  .card-focus img{max-width:calc(100vw - 28px);max-height:calc(100svh - 96px);border-radius:12px;box-shadow:0 12px 36px #1919192b}
+  .card-focus-close{z-index:2;top:18px;right:18px;padding:0 14px;border-radius:999px;background:#191919;color:#fff;font-size:10px}
+}

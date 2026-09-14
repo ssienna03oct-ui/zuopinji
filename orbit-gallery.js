@@ -2,17 +2,18 @@ if (homeView) {
   const works = [
     ['01.jpg', '二十四节气·春'], ['02.jpg', '二十四节气·夏'],
     ['03.jpg', '二十四节气·秋'], ['04.jpg', '二十四节气·冬'],
-    ['05.jpg', '仲夏夜'], ['06.jpg', '小森林 1'],
-    ['07.jpg', '小森林 2'], ['08.jpg', '春日自然主义'],
-    ['09.jpg', '未标题'], ['10.jpg', '水果'],
+    ['05.jpg', '仲夏夜'], ['06.jpg', '小森林·劳作'],
+    ['07.jpg', '小森林·收获'], ['08.jpg', '春日自然主义'],
+    ['09.jpg', '瑜伽进行时'], ['10.jpg', '水果插画'],
     ['11.jpg', '热植主理人'], ['12.jpg', '猫咪日'],
-    ['13.jpg', '猫咪驱虫前的准备工作'], ['14.jpg', '百鬼夜行'],
-    ['15.jpg', '羽暖松间'], ['16.jpg', '餐具音乐会']
+    ['13.jpg', '驱虫前的准备工作'], ['14.jpg', '百鬼夜行'],
+    ['15.jpg', '羽暖松间'], ['16.jpg', '餐具音乐会'],
+    ['17.jpg', '夏天的味道'], ['18.jpg', 'Breath']
   ];
   const section = document.createElement('section');
   section.className = 'orbit-gallery';
   section.id = 'orbit-gallery';
-  section.setAttribute('aria-label', '十六张插画组成的多形态环形画廊');
+  section.setAttribute('aria-label', '十八张插画组成的多形态环形画廊');
   section.innerHTML = `
     <header class="orbit-gallery-head">
       <p class="orbit-gallery-kicker">SELECTED ILLUSTRATIONS</p>
@@ -24,9 +25,9 @@ if (homeView) {
       </div>
     </header>
     <div class="orbit-gallery-stage" tabindex="0" aria-label="拖拽、滚轮或方向键旋转插画圆环">
-      ${works.map(([file, title], index) => `<figure class="orbit-gallery-card" style="--card-index:${index}" data-index="${index}"><span class="orbit-gallery-card-shell"><img src="assets/orbit-gallery/${file}" alt="${title}" loading="lazy" decoding="async" fetchpriority="low"></span></figure>`).join('')}
+      ${works.map(([file, title], index) => `<figure class="orbit-gallery-card" style="--card-index:${index}" data-index="${index}" tabindex="0" role="button" aria-label="查看${title}细节"><span class="orbit-gallery-card-shell"><img src="assets/orbit-gallery-20260914/cards/${file}" alt="${title}" loading="lazy" decoding="async" fetchpriority="low"></span></figure>`).join('')}
     </div>
-    <footer class="orbit-gallery-foot"><p>SCROLL / DRAG TO EXPLORE</p><p class="orbit-gallery-index"><span>01</span> — 16</p></footer>`;
+    <footer class="orbit-gallery-foot"><p>DRAG TO ROTATE · TAP FOR DETAILS</p><p class="orbit-gallery-index"><span>01</span> — ${String(works.length).padStart(2, '0')}</p></footer>`;
   document.querySelector('#illustration-worlds').after(section);
 
   const stage = section.querySelector('.orbit-gallery-stage');
@@ -53,6 +54,9 @@ if (homeView) {
   let pointerX = 0;
   let pointerY = 0;
   let lastPointerTime = 0;
+  let dragDistance = 0;
+  let suppressCardClickUntil = 0;
+  let pointerCaptureTarget = null;
   let wheelTimer = 0;
   let snapTarget = null;
   let entering = false;
@@ -85,7 +89,7 @@ if (homeView) {
     return {
       x:rawX * Math.cos(orbitRotation) - rawY * Math.sin(orbitRotation),
       y:height * mode.centerY + rawX * Math.sin(orbitRotation) + rawY * Math.cos(orbitRotation),
-      scale:mix(mode.scaleBack, mode.scaleFront, depth) * mode.cardScale * (width < 768 ? .62 : 1),
+      scale:mix(mode.scaleBack, mode.scaleFront, depth) * mode.cardScale * (width < 768 ? .84 : 1),
       opacity:mix(mode.opacityBack, 1, depth),
       rotateX:cos * mode.rotateX,
       rotateY:cos * mode.rotateY,
@@ -159,21 +163,36 @@ if (homeView) {
     });
   };
   buttons.forEach(button => button.addEventListener('click', () => chooseMode(button.dataset.mode)));
+  cards.forEach((card, index) => {
+    const openDetail = () => {
+      if (performance.now() < suppressCardClickUntil) return;
+      openCardFocus(`assets/orbit-gallery-20260914/details/${works[index][0]}`, `${works[index][1]}细节`);
+    };
+    card.addEventListener('click', openDetail);
+    card.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openDetail();
+    });
+  });
   stage.addEventListener('pointerdown', event => {
     if (event.button !== 0) return;
     pointerId = event.pointerId;
     pointerX = event.clientX;
     pointerY = event.clientY;
     lastPointerTime = performance.now();
+    dragDistance = 0;
     velocity = 0;
     snapTarget = null;
     stage.classList.add('is-dragging');
-    stage.setPointerCapture(pointerId);
+    pointerCaptureTarget = event.target instanceof Element ? event.target : stage;
+    pointerCaptureTarget.setPointerCapture?.(pointerId);
   });
   stage.addEventListener('pointermove', event => {
     if (event.pointerId !== pointerId) return;
     const now = performance.now();
     const delta = (event.clientX - pointerX) + (event.clientY - pointerY) * .35;
+    dragDistance += Math.abs(event.clientX - pointerX) + Math.abs(event.clientY - pointerY);
     const deltaAngle = delta / Math.max(320, stage.clientWidth) * Math.PI * 1.45;
     angle += deltaAngle;
     velocity = deltaAngle / Math.max(1, now - lastPointerTime) * 16.67;
@@ -183,8 +202,10 @@ if (homeView) {
   });
   const releasePointer = event => {
     if (event.pointerId !== pointerId) return;
-    if (stage.hasPointerCapture(pointerId)) stage.releasePointerCapture(pointerId);
+    if (pointerCaptureTarget?.hasPointerCapture?.(pointerId)) pointerCaptureTarget.releasePointerCapture(pointerId);
     pointerId = null;
+    if (dragDistance > 8) suppressCardClickUntil = performance.now() + 260;
+    pointerCaptureTarget = null;
     stage.classList.remove('is-dragging');
     window.setTimeout(settle, 120);
   };

@@ -132,6 +132,8 @@ const facts = {
   nomaster: ['概念项目 · 独立完成', '品牌视觉设计', '宠物拥有自己的生活', '围绕品牌概念展开标志、角色与传播语言，呈现不同视觉形式的组合。', '虚拟项目，用于展示完整的视觉创意与系统延展。'],
   veccirc: ['概念项目 · 独立完成', '品牌视觉设计', '从雕塑造型到品牌图形', '以实体造型与二维图形之间的联系，呈现具有个人辨识度的品牌表达。', '虚拟项目；雕塑背景与图形转译是本案例的重点。'],
   daidai: ['概念项目 · 独立完成', 'IP 形象设计', '从角色设定到场景延展', '通过角色设定、三视图与应用，展示 IP 的形象与延展可能。', '虚拟项目。'],
+  summer: ['概念项目 · 独立完成', '商业插画设计', '以夏日意象构建轻盈梦境', '围绕海滩、音乐与夏日色彩展开系列插画，呈现轻松而富有节奏的视觉氛围。', '自主虚拟项目。'],
+  garden: ['概念项目 · 独立完成', '插画与叙事视觉', '走进少女与植物交织的花园', '通过人物、植物与场景细节构建连续画面，探索插画中的情绪表达与叙事空间。', '自主虚拟项目。'],
   crocs: ['概念项目 · 独立完成', '插画与创意视觉', '以插画构建色彩世界', '以人物、图形与色彩组织视觉画面，探索插画在品牌场景中的表达。', '自主虚拟项目，非 Crocs 官方委托或联名合作。']
 };
 const features = document.querySelector('.home-feature-grid');
@@ -159,7 +161,7 @@ if (project && facts[activeProject]) {
   overview.append(eyebrow, title, heading, description, role, status, link);
   pages.prepend(overview);
   const end = document.createElement('section'); end.className = 'case-overview case-next';
-  const order = ['haochao','nomaster','veccirc','daidai','crocs'];
+  const order = ['haochao','nomaster','veccirc','daidai','summer','garden','crocs','personal'];
   const next = order[(order.indexOf(activeProject) + 1) % order.length];
   end.innerHTML = `<p>继续浏览</p><a href="?project=${next}">下一个项目 / ${projects[next].title} ↗</a><a href="?view=home">返回首页</a>`;
   pages.append(end);
