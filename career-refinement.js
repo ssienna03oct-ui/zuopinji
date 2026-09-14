@@ -1,8 +1,8 @@
 // Editorial information remains independent of the cover movie.
 const identity = document.createElement('section');
 identity.className = 'home-identity';
-identity.innerHTML = '<p>欧阳雨晴 / PORTFOLIO 2026</p><h1>视觉设计师</h1><p>以品牌识别为核心，连接插画与 IP 的创意表达。</p><a href="#selected-projects">查看精选项目 ↘</a>';
-document.querySelector('.home-hero').before(identity);
+identity.innerHTML = '<p>欧阳雨晴 / PORTFOLIO 2026</p><h1>视觉设计师</h1><p>以品牌识别为核心，连接插画与 IP 的创意表达。</p><a href="#selected-projects-board">查看精选项目 ↘</a>';
+document.querySelector('.home-hero').after(identity);
 const textNav = document.createElement('nav');
 textNav.className = 'home-text-nav';
 textNav.setAttribute('aria-label', '主要导航');
