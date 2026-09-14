@@ -3,7 +3,7 @@ const pad = n => String(n).padStart(3, '0');
 const projects = {
   haochao:{category:'Brand design',title:'好巢 / WONDER NEST',start:7,end:19},
   nomaster:{category:'Brand design',title:'NoMaster',start:20,end:38},
-  veccirc:{category:'Brand design',title:'VECCIRC',start:39,end:51},
+  veccirc:{category:'Brand design',title:'VECGIRC',start:39,end:51},
   daidai:{category:'Ip design',title:'DAIDAI',start:53,end:66},
   summer:{category:'Illustration design',title:'Summer Dream',start:68,end:78},
   garden:{category:'Illustration design',title:'迷失的少女花园',start:79,end:89},
