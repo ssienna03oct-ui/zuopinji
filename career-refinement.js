@@ -77,8 +77,26 @@ if (homeView) {
   document.querySelector('.home-intro').before(boardSection);
   document.body.classList.add('board-projects-ready');
   const flipCards = [...boardSection.querySelectorAll('.project-flip-card')];
+  // Hidden reverse faces must load before they become visible on mobile.
+  const boardImages = [...boardSection.querySelectorAll('img')];
+  boardImages.forEach(image => {
+    const markReady = async () => {
+      if (!image.complete || !image.naturalWidth) return;
+      try {
+        if (image.decode) await image.decode();
+      } catch {
+        return;
+      }
+      image.dataset.ready = 'true';
+    };
+    image.addEventListener('load', markReady);
+    image.loading = 'eager';
+    image.fetchPriority = 'high';
+    markReady();
+  });
   const flipCard = async (card, axis, direction) => {
     if (card.dataset.turning === 'true') return;
+    if ([...card.querySelectorAll('img')].some(image => image.dataset.ready !== 'true')) return;
     card.dataset.turning = 'true';
     const inner = card.querySelector('.project-card-inner');
     const front = card.querySelector('.project-card-front');
