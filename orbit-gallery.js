@@ -25,10 +25,37 @@ if (homeView) {
       </div>
     </header>
     <div class="orbit-gallery-stage" tabindex="0" aria-label="拖拽、滚轮或方向键旋转插画圆环">
-      ${works.map(([file, title], index) => `<figure class="orbit-gallery-card" style="--card-index:${index}" data-index="${index}" tabindex="0" role="button" aria-label="查看${title}细节"><span class="orbit-gallery-card-shell"><img src="assets/orbit-gallery-20260914/cards/${file}" alt="${title}" loading="lazy" decoding="async" fetchpriority="low"></span></figure>`).join('')}
+      ${works.map(([file, title], index) => `<figure class="orbit-gallery-card" style="--card-index:${index}" data-index="${index}" tabindex="0" role="button" aria-label="查看${title}细节"><span class="orbit-gallery-card-shell"><img data-src="assets/orbit-gallery-20260914/thumbs/${file}" alt="${title}" width="400" height="400" decoding="async"></span></figure>`).join('')}
     </div>
     <footer class="orbit-gallery-foot"><p>DRAG TO ROTATE · TAP FOR DETAILS</p><p class="orbit-gallery-index"><span>01</span> — ${String(works.length).padStart(2, '0')}</p></footer>`;
   document.querySelector('#illustration-worlds').after(section);
+
+  // Load the whole orbit together before it enters view; transformed cards
+  // should not depend on the browser's per-image lazy-loading heuristics.
+  const loadThumbnails = () => {
+    section.querySelectorAll('img[data-src]').forEach(image => {
+      const source = image.dataset.src;
+      delete image.dataset.src;
+      let retries = 0;
+      image.addEventListener('error', () => {
+        if (retries >= 2) return;
+        retries += 1;
+        window.setTimeout(() => { image.src = `${source}?retry=${retries}`; }, retries * 1000);
+      });
+      image.loading = 'eager';
+      image.src = source;
+    });
+  };
+  if ('IntersectionObserver' in window) {
+    const preloadObserver = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      loadThumbnails();
+      preloadObserver.disconnect();
+    }, {rootMargin:'1200px 0px'});
+    preloadObserver.observe(section);
+  } else {
+    loadThumbnails();
+  }
 
   const stage = section.querySelector('.orbit-gallery-stage');
   const cards = [...section.querySelectorAll('.orbit-gallery-card')];
